@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/Calculadora_Python.egg-info/PKG-INFO
+src/Calculadora_Python.egg-info/SOURCES.txt
+src/Calculadora_Python.egg-info/dependency_links.txt
+src/Calculadora_Python.egg-info/requires.txt
+src/Calculadora_Python.egg-info/top_level.txt
+src/core/__init__.py
+src/core/calculator.py
+src/database/__init__.py
+src/ui/__init__.py

@@ -1,0 +1,6 @@
+pydantic>=2.11.3
+pyqt5>=5.15.11
+pytest-mock>=3.14.0
+
+[dev]
+pytest>=8.0.0

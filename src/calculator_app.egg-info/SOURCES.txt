@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/calculator_app.egg-info/PKG-INFO
+src/calculator_app.egg-info/SOURCES.txt
+src/calculator_app.egg-info/dependency_links.txt
+src/calculator_app.egg-info/requires.txt
+src/calculator_app.egg-info/top_level.txt
+src/core/__init__.py
+src/core/calculator.py
+src/database/__init__.py
+src/database/history_db.py
+src/database/history_manager_db.py
+src/ui/__init__.py
+src/ui/ui_interface_creator.py
+tests/test_calculator.py
+tests/test_history_manager.py

@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: calculator-app
+Version: 0.1.0
+Requires-Python: >=3.9
+Requires-Dist: pydantic>=2.11.3
+Requires-Dist: pyqt5>=5.15.11
+Requires-Dist: pytest-mock>=3.14.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
