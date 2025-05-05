@@ -7,8 +7,10 @@ name = "calculator-app"
 version = "0.1.0"
 requires-python = ">=3.9"
 dependencies = [
+    "flake8>=7.2.0",
     # Añadiremos ttkbootstrap aquí después
     "pydantic>=2.11.3",
+    "pylint>=3.3.7",
     "pyqt5>=5.15.11",
     "pytest-mock>=3.14.0",
 ]
