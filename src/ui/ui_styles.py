@@ -1,6 +1,11 @@
-# variables constantes para interfaz
+# MODULO: ui_styles.py
+"""
+Almacena las variables de los estilos CSS para los elementos de la interfaz:
+    - Pantallas (QLabel)
+    - Botones (QPushButton)
+"""
 
-
+# ---------------------------------------------------- Estilos de las pantallas
 style_eq: str = """
     QLabel {
         font-size: 20px;
@@ -10,7 +15,7 @@ style_eq: str = """
 
 style_res: str = """
     QLabel {
-        font-size: 5px;
+        font-size: 40px;
         color: #A8DADC;
     }
 """
@@ -81,4 +86,3 @@ equal_buttons_style: str = """
         font-weight: bold;
     }
 """
-

@@ -12,8 +12,8 @@ class HistoryTableDB(BaseModel):
     """
     Crea la instancia de la tabla history_table en la base de datos.
     atributos:
-        - equation: str (equación de la operación)
-        - result: Decimal (resultado de la ecuación, tipo Decimal)
+        - equation: str (equación de la operación).
+        - result: Decimal (resultado de la ecuación, tipo Decimal).
     """
     equation: str = None
     result: Decimal = None

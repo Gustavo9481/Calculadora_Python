@@ -1,36 +1,53 @@
+# MODULO: ui_buttons_creator.py
+"""
+Crea los botones de la interfaz y sus métodos al ser presionados a través de la
+clase ButtonsCreator, empleando un patrón de diseño de factory method.
+"""
+# pylint: disable=too-many-arguments
+# pylint: disable=too-many-positional-arguments
+# pylint: disable=too-many-instance-attributes
 from decimal import Decimal
 from functools import partial
-from PyQt5.QtWidgets import (
-    QPushButton,
-    QGridLayout,
-    QWidget
-)
-from PyQt5.QtCore import Qt
+# pylint: disable=no-name-in-module
+from PyQt5.QtWidgets import QPushButton, QGridLayout
 from core.calculator import Calculator
 try:
-    from ui_data import general_buttons_style, c_buttons_style, equal_buttons_style
+    from ui_styles import (
+        general_buttons_style,
+        c_buttons_style,
+        equal_buttons_style
+    )
 except ModuleNotFoundError:
-    from .ui_data import general_buttons_style, c_buttons_style, equal_buttons_style
+    from .ui_styles import (
+        general_buttons_style,
+        c_buttons_style,
+        equal_buttons_style
+    )
 
 
-
+# ----------------------------------------------------- class -> ButtonsCreator
 class ButtonsCreator:
     """
     Clase para crear y gestionar los botones de la calculadora.
     """
-    def __init__(self, central_widget,  display_value_1, display_value_2, display_operator, display_result):
+    def __init__(
+            self,
+            central_widget,
+            display_value_1,
+            display_value_2,
+            display_operator,
+            display_result
+            ):
         """
         Constructor de la clase ButtonsCreator.
-
         Args:
-            central_widget (QWidget): Widget central donde se colocarán los botones.
+            central_widget (QWidget): Widget central donde estaran los botones.
             display_value_1 (QLabel): Label para mostrar el primer valor.
             display_value_2 (QLabel): Label para mostrar el segundo valor.
             display_operator (QLabel): Label para mostrar el operador.
             display_result (QLabel): Label para mostrar el resultado.
         """
         self.central_widget = central_widget
-        self.buttons = {}
         self.display_value_1 = display_value_1
         self.display_value_2 = display_value_2
         self.display_operator = display_operator
@@ -38,11 +55,12 @@ class ButtonsCreator:
         self.value_1 = ""
         self.value_2 = ""
         self.current_operator = ""
+        self.buttons: dict = {}
 
-    def create_buttons(self):
+    def create_buttons(self) -> QGridLayout:
         """
-        Crea los botones de la calculadora y establece la conexión con las funciones correspondientes.
-
+        Crea los botones de la calculadora y establece la conexión con las
+        funciones correspondientes.
         Returns:
             QGridLayout: Layout que contiene los botones.
         """
@@ -51,7 +69,7 @@ class ButtonsCreator:
         button_data = [
             ("󰯲", 0, 0, c_buttons_style, "C", self.clear_screen),
             ("%", 0, 1, general_buttons_style, "%", self.insert_operator),
-            ("", 0, 2, general_buttons_style, "D", self.delete_last_character),
+            ("", 0, 2, general_buttons_style, "D", self.delete_last_char),
             ("󰇔", 0, 3, general_buttons_style, "/", self.insert_operator),
             ("7", 1, 0, general_buttons_style, "7", self.insert_value),
             ("8", 1, 1, general_buttons_style, "8", self.insert_value),
@@ -78,20 +96,24 @@ class ButtonsCreator:
             buttons_layout.addWidget(button, row, column)
             self.buttons[text] = button
             button.clicked.connect(partial(func, value))
+
         return buttons_layout
 
-    def get_buttons(self):
+    def get_buttons(self) -> dict:
         """
         Obtiene el diccionario de botones creados.
-
         Returns:
             dict: Diccionario donde las claves son los textos de los botones
                   y los valores son los objetos QPushButton correspondientes.
         """
         return self.buttons
 
-    def insert_value(self, value):
-        """Inserta un número en la pantalla."""
+    def insert_value(self, value: str) -> None:
+        """
+        Inserta un valor numérico o un punto decimal en la pantalla.
+        Args:
+            value (str): Valor numérico o punto a insertar.
+        """
         if self.current_operator == "":
             self.value_1 += value
             self.display_value_1.setText(self.value_1)
@@ -99,8 +121,12 @@ class ButtonsCreator:
             self.value_2 += value
             self.display_value_2.setText(self.value_2)
 
-    def insert_operator(self, operator):
-        """Inserta un operador."""
+    def insert_operator(self, operator: str) -> None:
+        """
+        Inserta un operador en la pantalla correspondiente.
+        Args:
+            operador: operador correspondiente a la ecuación.
+        """
         if self.value_1 != "" and self.value_2 == "":
             self.current_operator = operator
             self.display_operator.setText(self.current_operator)
@@ -109,8 +135,10 @@ class ButtonsCreator:
             self.current_operator = operator
             self.display_operator.setText(self.current_operator)
 
-    def clear_screen(self, value):
-        """Limpia las pantallas."""
+    def clear_screen(self, vlaue: str) -> None:
+        """
+        Limpia las pantallas al prsionar botón C.
+        """
         self.display_value_1.clear()
         self.display_value_2.clear()
         self.display_operator.clear()
@@ -119,8 +147,10 @@ class ButtonsCreator:
         self.value_2 = ""
         self.current_operator = ""
 
-    def delete_last_character(self, value):
-        """Borra el último carácter de la entrada actual."""
+    def delete_last_char(self, value: str) -> None:
+        """
+        Borra último carácter de la entrada actual al presionar la tecla '"'.
+        """
         if self.current_operator == "":
             self.value_1 = self.value_1[:-1]
             self.display_value_1.setText(self.value_1)
@@ -128,22 +158,21 @@ class ButtonsCreator:
             self.value_2 = self.value_2[:-1]
             self.display_value_2.setText(self.value_2)
 
-    def calculate_result(self, value):
-        """Realiza el cálculo y muestra el resultado."""
-        
+    def calculate_result(self, value: str) -> None:
+        """
+        Convierte los valores a tipo Decimal, realiza el cálculo
+        correspondiente al operador y muestra el resultado.
+        """
         if "" not in (self.value_1, self.value_2, self.current_operator):
-
             try:
-
                 calculator = Calculator()
-
                 num1, num2 = Decimal(self.value_1), Decimal(self.value_2)
                 operations: dict = {
-                "+": calculator.add,
-                "-": calculator.subtract,
-                "*": calculator.multiply,
-                "/": calculator.divide,
-                "%": calculator.percent
+                    "+": calculator.add,
+                    "-": calculator.subtract,
+                    "*": calculator.multiply,
+                    "/": calculator.divide,
+                    "%": calculator.percent
                 }
 
                 if self.current_operator in operations:
@@ -160,4 +189,3 @@ class ButtonsCreator:
                 self.value_1 = ""
                 self.value_2 = ""
                 self.current_operator = ""
-

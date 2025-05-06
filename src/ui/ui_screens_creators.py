@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QSizePolicy
 )
-
+from ui_styles import style_eq, style_res
 # ........................... ui_screens_creators ........................... 󰌠
 # Módulo encargado de la creación de pantallas de la inetrfaz
 
@@ -60,21 +60,10 @@ class ScreensCreator:
         style_eq (str): CSS pantallas de entrada (valor 1, operador y valor 2)
         style_res (str): CSS pantalla de resultado
     """
-
-    # Estilos para las pantallas.
-    style_eq: str = """
-        QLabel {
-            font-size: 20px;
-            color: #A8DADC;
-        }
-    """
-
-    style_res: str = """
-        QLabel {
-            font-size: 40px;
-            color: #A8DADC;
-        }
-    """
+    
+    #Estilos para las pantallas.
+    style_eq: str = style_eq
+    style_res: str = style_res
 
     def __init__(self, main_window: QMainWindow):
         """
