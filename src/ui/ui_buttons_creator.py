@@ -6,9 +6,11 @@ clase ButtonsCreator, empleando un patrón de diseño de factory method.
 # pylint: disable=too-many-arguments
 # pylint: disable=too-many-positional-arguments
 # pylint: disable=too-many-instance-attributes
+# pylint: disable=no-name-in-module
 from decimal import Decimal
 from functools import partial
-# pylint: disable=no-name-in-module
+from typing import Dict
+from pydantic import BaseModel, Field
 from PyQt5.QtWidgets import QPushButton, QGridLayout
 from core.calculator import Calculator
 try:
@@ -23,6 +25,23 @@ except ModuleNotFoundError:
         c_buttons_style,
         equal_buttons_style
     )
+
+
+class ButtonData(BaseModel):
+    """ Modelo para validar los datos de un botón """
+    text: str
+    value: str
+    style: str
+    row: int = Field(ge=0, lt=5)
+    column: int = Field(ge=0, lt=4)
+    func: str
+
+
+class CalculatorState(BaseModel):
+    """ Modelo para validar el estado de la calculadora """
+    value_1: str = ""
+    value_2: str = ""
+    current_operator: str = ""
 
 
 # ----------------------------------------------------- class -> ButtonsCreator
@@ -52,10 +71,8 @@ class ButtonsCreator:
         self.display_value_2 = display_value_2
         self.display_operator = display_operator
         self.display_result = display_result
-        self.value_1 = ""
-        self.value_2 = ""
-        self.current_operator = ""
-        self.buttons: dict = {}
+        self.state = CalculatorState()
+        self.buttons: Dict[str, QPushButton] = {}
 
     def create_buttons(self) -> QGridLayout:
         """
@@ -114,12 +131,12 @@ class ButtonsCreator:
         Args:
             value (str): Valor numérico o punto a insertar.
         """
-        if self.current_operator == "":
-            self.value_1 += value
-            self.display_value_1.setText(self.value_1)
+        if self.state.current_operator == "":
+            self.state.value_1 += value
+            self.display_value_1.setText(self.state.value_1)
         else:
-            self.value_2 += value
-            self.display_value_2.setText(self.value_2)
+            self.state.value_2 += value
+            self.display_value_2.setText(self.state.value_2)
 
     def insert_operator(self, operator: str) -> None:
         """
@@ -127,13 +144,13 @@ class ButtonsCreator:
         Args:
             operador: operador correspondiente a la ecuación.
         """
-        if self.value_1 != "" and self.value_2 == "":
-            self.current_operator = operator
-            self.display_operator.setText(self.current_operator)
-        elif self.value_1 != "" and self.value_2 != "":
+        if self.state.value_1 != "" and self.state.value_2 == "":
+            self.state.current_operator = operator
+            self.display_operator.setText(self.state.current_operator)
+        elif self.state.value_1 != "" and self.state.value_2 != "":
             self.calculate_result("=")
-            self.current_operator = operator
-            self.display_operator.setText(self.current_operator)
+            self.state.current_operator = operator
+            self.display_operator.setText(self.state.current_operator)
 
     def clear_screen(self, vlaue: str) -> None:
         """
@@ -143,30 +160,33 @@ class ButtonsCreator:
         self.display_value_2.clear()
         self.display_operator.clear()
         self.display_result.clear()
-        self.value_1 = ""
-        self.value_2 = ""
-        self.current_operator = ""
+        self.state = CalculatorState()
 
     def delete_last_char(self, value: str) -> None:
         """
-        Borra último carácter de la entrada actual al presionar la tecla '"'.
+        Borra último carácter de la entrada actual al presionar la tecla '"'.
         """
-        if self.current_operator == "":
-            self.value_1 = self.value_1[:-1]
-            self.display_value_1.setText(self.value_1)
+        if self.state.current_operator == "":
+            self.state.value_1 = self.state.value_1[:-1]
+            self.display_value_1.setText(self.state.value_1)
         else:
-            self.value_2 = self.value_2[:-1]
-            self.display_value_2.setText(self.value_2)
+            self.state.value_2 = self.state.value_2[:-1]
+            self.display_value_2.setText(self.state.value_2)
 
     def calculate_result(self, value: str) -> None:
-        """
+        """tu dist
         Convierte los valores a tipo Decimal, realiza el cálculo
         correspondiente al operador y muestra el resultado.
         """
-        if "" not in (self.value_1, self.value_2, self.current_operator):
+        if "" not in (
+            self.state.value_1,
+            self.state.value_2,
+            self.state.current_operator
+        ):
             try:
                 calculator = Calculator()
-                num1, num2 = Decimal(self.value_1), Decimal(self.value_2)
+                num1 = Decimal(self.state.value_1)
+                num2 = Decimal(self.state.value_2)
                 operations: dict = {
                     "+": calculator.add,
                     "-": calculator.subtract,
@@ -175,17 +195,16 @@ class ButtonsCreator:
                     "%": calculator.percent
                 }
 
-                if self.current_operator in operations:
-                    result = operations[self.current_operator](num1, num2)
+                if self.state.current_operator in operations:
+                    result = operations[
+                        self.state.current_operator
+                    ](num1, num2)
                     self.display_result.setText(str(result))
-                    self.value_1 = str(result)
-                    self.value_2 = ""
-                    self.current_operator = ""
+                    self.state = CalculatorState(value_1=str(result))
                 else:
                     self.display_result.setText("Error: Invalid Operator")
+                    self.state = CalculatorState()
 
             except Exception as e:
                 self.display_result.setText(f"Error: {e}")
-                self.value_1 = ""
-                self.value_2 = ""
-                self.current_operator = ""
+                self.state = CalculatorState()
