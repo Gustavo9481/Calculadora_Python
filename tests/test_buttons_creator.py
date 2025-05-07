@@ -33,5 +33,5 @@ def test_insert_value():
     calculator.insert_value("5")
 
     # Assert
-    assert calculator.value_1 == "5"
+    assert calculator.state.value_1 == "5"
     assert display_value_1.text == "5"  # Verifica que el mock se haya actualizado

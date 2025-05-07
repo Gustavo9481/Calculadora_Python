@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QSizePolicy
 )
-from ui_styles import style_eq, style_res
+from .ui_styles import style_eq, style_res
 
 
 # ------------------------------------------------------- class -> ScreenConfig

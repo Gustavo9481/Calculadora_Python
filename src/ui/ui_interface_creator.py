@@ -1,36 +1,33 @@
+# MODULO: ui_inteface_creator.py
 """
 Módulo encargado de la creación de la interfaz gráfica de la calculadora.
-
 Este módulo implementa el patrón Factory para crear los componentes de la UI:
 - Pantallas (valores y operadores)
 - Botones (números y operaciones)
 - Layout principal
-
 Uso:
     interface = InterfaceCreator()
     interface.run()
 """
+# pylint: disable=E0611,E0401
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
     QWidget,
     QVBoxLayout,
 )
-from ui_screens_creators import ScreensCreator
-from ui_buttons_creator import ButtonsCreator
+from .ui_screens_creators import ScreensCreator
+from .ui_buttons_creator import ButtonsCreator
 
 
-
-# ---------------------------------------------------------- InterfaceCreator 
+# --------------------------------------------------- class -> InterfaceCreator
 class InterfaceCreator:
     """
     Clase que gestiona la creación y configuración de la interfaz gráfica.
-
     Implementa el patrón Factory para:
     - Crear y configurar pantallas usando ScreensCreator
     - Crear y configurar botones usando ButtonsCreator
     - Organizar el layout principal de la aplicación
-
     Attributes:
         app (QApplication): Instancia de la aplicación Qt
         main_window (QMainWindow): Ventana principal de la aplicación
@@ -42,19 +39,16 @@ class InterfaceCreator:
     def __init__(self) -> None:
         """
         Inicializa la interfaz gráfica.
-
-        Este método crea la aplicación Qt y la ventana principal,
-        y configura la interfaz llamando a _setup_window().
+        Este método crea la aplicación Qt y la ventana principal, y configura
+        la interfaz llamando a _setup_window().
         """
         self.app = QApplication([])
         self.main_window = QMainWindow()
         self._setup_window()
-        
 
     def _setup_window(self) -> None:
         """
         Configura la ventana principal y sus componentes.
-
         Este método:
         1. Configura propiedades básicas de la ventana (título, tamaño, estilo)
         2. Crea el widget central y su layout principal
@@ -62,40 +56,35 @@ class InterfaceCreator:
         4. Crea y configura los botones usando ButtonsCreator
         5. Organiza el layout final de la ventana
         """
-        # 1. Configuración de la ventana principal
+        # Configuración de la ventana principal
         self.main_window.setWindowTitle("Proyecto Calculadora Python")
         self.main_window.setGeometry(100, 100, 290, 470)
         self.main_window.setStyleSheet("background-color: #0B0E14;")
 
-        # 2. Creación del widget central y su layout
+        # Creación del widget central y su layout
         central_widget = QWidget()
         central_widget.setFixedSize(290, 470)
         main_layout = QVBoxLayout(central_widget)
-        
-        # 3. Crear y obtener las pantallas usando ScreensCreator
+
+        # Crear y obtener las pantallas usando ScreensCreator
         screens_creator = ScreensCreator(self.main_window)
-        # obsidian-> agregar a la documentación interna.
-        # la instancia crea las pantallas y las retorna en una tupla, en el 
-        # siguiente bloque se desempaquetan para poder usar esos valores para
-        # instanciar ButtonsCreator.
-        
-        # hack-> desempaquetado de tupla
-        (screens_layout, 
-        self.display_value_1, 
-        self.display_value_2, 
-        self.display_operator, 
-        self.display_result
-        ) = screens_creator.create_screens()
-        
+
+        # HACK: desempaquetado de tupla
+        (screens_layout,
+            self.display_value_1,
+            self.display_value_2,
+            self.display_operator,
+            self.display_result) = screens_creator.create_screens()
+
         main_layout.addLayout(screens_layout)
 
-        # 4. Crear y obtener los botones usando ButtonsCreator
-        # note-> uso de los valores desempaquetados de la tupla.
+        # Crear y obtener los botones usando ButtonsCreator
+        # NOTE: uso de los valores desempaquetados de la tupla.
         buttons_creator = ButtonsCreator(
-            central_widget, 
-            self.display_value_1, 
-            self.display_value_2, 
-            self.display_operator, 
+            central_widget,
+            self.display_value_1,
+            self.display_value_2,
+            self.display_operator,
             self.display_result
         )
         buttons_layout = buttons_creator.create_buttons()
@@ -106,7 +95,6 @@ class InterfaceCreator:
     def run(self) -> None:
         """
         Inicia la aplicación.
-
         Este método:
         1. Muestra la ventana principal
         2. Inicia el bucle de eventos de Qt
@@ -117,17 +105,9 @@ class InterfaceCreator:
 
 
 
-# task-> mover if __name__ == "__main__" al archivo main.py.
-
-if __name__ == "__main__":
-    interface = InterfaceCreator()
-    interface.run()
-
-# obsidian-> agregar las notas del desempaquetado y su funcionamiento.
-# pattern-> factory
+# NOTE: agregar las notas del desempaquetado y su funcionamiento.
 """
 El patrón Factory se utiliza aquí porque:
-
 Encapsula la lógica de creación de objetos (pantallas y botones)
 Permite crear diferentes tipos de objetos (pantallas con diferentes estilos)
 Centraliza la creación de objetos en clases específicas
