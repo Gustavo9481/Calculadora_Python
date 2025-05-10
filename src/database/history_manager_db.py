@@ -144,8 +144,8 @@ class HistoryManager:
 
 
 # TEST: pruebas simples de funcionamiento de base de datos. Teporales.
-instance = HistoryManager()
-instance.create_table()
-instance.new_history("2 + 5", Decimal(7))
-instance.get_last_records()
+# instance = HistoryManager()
+# instance.create_table()
+# instance.new_history("2 + 5", Decimal(7))
+# instance.get_last_records()
 # instance.delete_history()

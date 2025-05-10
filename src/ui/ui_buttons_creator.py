@@ -13,6 +13,7 @@ from typing import Dict
 from pydantic import BaseModel, Field
 from PyQt5.QtWidgets import QPushButton, QGridLayout
 from core.calculator import Calculator
+from database.history_manager_db import HistoryManager
 try:
     from ui_styles import (
         general_buttons_style,
@@ -48,6 +49,16 @@ class CalculatorState(BaseModel):
 class ButtonsCreator:
     """
     Clase para crear y gestionar los botones de la calculadora.
+    Attributes:
+            central_widget (QWidget): Widget central donde estaran los botones.
+            display_value_1 (QLabel): Label para mostrar el primer valor.
+            display_value_2 (QLabel): Label para mostrar el segundo valor.
+            display_operator (QLabel): Label para mostrar el operador.
+            display_result (QLabel): Label para mostrar el resultado.
+            state (CalculatorState): Estado actual de la calculadora.
+            buttons (Dict)[str, QPushButton]: Diccionario de botones creados.
+            history_manager (HistoryManager): Instancia de HistoryManager para
+            gestión de registros en base de datos.
     """
     def __init__(
             self,
@@ -73,6 +84,7 @@ class ButtonsCreator:
         self.display_result = display_result
         self.state = CalculatorState()
         self.buttons: Dict[str, QPushButton] = {}
+        self.history_manager = HistoryManager()
 
     def create_buttons(self) -> QGridLayout:
         """
@@ -128,9 +140,22 @@ class ButtonsCreator:
     def insert_value(self, value: str) -> None:
         """
         Inserta un valor numérico o un punto decimal en la pantalla.
+        Solo permite un punto decimal por número.
         Args:
             value (str): Valor numérico o punto a insertar.
         """
+        # Validar punto decimal
+        if value == ".":
+            if self.state.current_operator == "":
+                # Verificar si ya existe un punto en value_1
+                if self.state.value_1.count(".") > 0:
+                    return
+            else:
+                # Verificar si ya existe un punto en value_2
+                if self.state.value_2.count(".") > 0:
+                    return
+
+        # Insertar el valor si es válido
         if self.state.current_operator == "":
             self.state.value_1 += value
             self.display_value_1.setText(self.state.value_1)
@@ -174,9 +199,11 @@ class ButtonsCreator:
             self.display_value_2.setText(self.state.value_2)
 
     def calculate_result(self, value: str) -> None:
-        """tu dist
+        """
         Convierte los valores a tipo Decimal, realiza el cálculo
         correspondiente al operador y muestra el resultado.
+        Crea un nuevo registro en la base de datos con la ecuación y el
+        resultado usando la clase HistoryManager.(Singleton).
         """
         if "" not in (
             self.state.value_1,
@@ -200,7 +227,11 @@ class ButtonsCreator:
                         self.state.current_operator
                     ](num1, num2)
                     self.display_result.setText(str(result))
+                    history_manager = HistoryManager()
+                    equation: str = f"{num1} {str(self.state.current_operator)} {num2}"
+                    self.history_manager.new_history(equation, Decimal(result))
                     self.state = CalculatorState(value_1=str(result))
+ 
                 else:
                     self.display_result.setText("Error: Invalid Operator")
                     self.state = CalculatorState()

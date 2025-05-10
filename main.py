@@ -1,5 +1,5 @@
-# MODULO: main.py -> módulo de inicio.
 # ....................... PROYECTO CALCULADORA PYTHON ....................... 󰌠
+# MODULO: main.py -> módulo de inicio.
 """
 Calculadora en python para escritorio, desarrollado para el repaso de
 conceptos básicos como:
@@ -11,7 +11,7 @@ conceptos básicos como:
 """
 # pylint: disable=E0401
 from src.ui.ui_interface_creator import InterfaceCreator
-
+from src.database.history_manager_db import HistoryManager
 
 # pylint: disable=R0903
 class AppCalculator:
@@ -34,6 +34,7 @@ class AppCalculator:
     """
 
     interface = InterfaceCreator()
+    history_db = HistoryManager()
 
     def main(self) -> None:
         """
@@ -48,6 +49,7 @@ class AppCalculator:
             None
         """
         self.interface.run()
+        self.history_db.create_table()
 
 
 if __name__ == "__main__":
