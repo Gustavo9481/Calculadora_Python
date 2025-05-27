@@ -1,4 +1,4 @@
-# MODULO: calculator.py.
+# MODULO: calculator.py
 """
 Proporciona operaciones aritméticas básicas.
 

@@ -60,6 +60,7 @@ class ButtonsCreator:
             history_manager (HistoryManager): Instancia de HistoryManager para
             gestión de registros en base de datos.
     """
+
     def __init__(
             self,
             central_widget,
@@ -67,7 +68,7 @@ class ButtonsCreator:
             display_value_2,
             display_operator,
             display_result
-            ):
+    ):
         """
         Constructor de la clase ButtonsCreator.
         Args:
@@ -226,12 +227,12 @@ class ButtonsCreator:
                     result = operations[
                         self.state.current_operator
                     ](num1, num2)
+                    result = result.quantize(Decimal('0.00'))
                     self.display_result.setText(str(result))
-                    history_manager = HistoryManager()
-                    equation: str = f"{num1} {str(self.state.current_operator)} {num2}"
+                    equation: str = f"{num1} {
+                        str(self.state.current_operator)} {num2}"
                     self.history_manager.new_history(equation, Decimal(result))
                     self.state = CalculatorState(value_1=str(result))
- 
                 else:
                     self.display_result.setText("Error: Invalid Operator")
                     self.state = CalculatorState()
