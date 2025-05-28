@@ -43,6 +43,7 @@ class CalculatorState(BaseModel):
     value_1: str = ""
     value_2: str = ""
     current_operator: str = ""
+    result: str = ""
 
 
 # ----------------------------------------------------- class -> ButtonsCreator
@@ -67,7 +68,7 @@ class ButtonsCreator:
             display_value_1,
             display_value_2,
             display_operator,
-            display_result
+            display_result,
     ):
         """
         Constructor de la clase ButtonsCreator.
@@ -175,8 +176,17 @@ class ButtonsCreator:
             self.display_operator.setText(self.state.current_operator)
         elif self.state.value_1 != "" and self.state.value_2 != "":
             self.calculate_result("=")
+            self.display_value_1.setText(str(self.state.result))
             self.state.current_operator = operator
             self.display_operator.setText(self.state.current_operator)
+            self.state = CalculatorState(
+                value_1=str(self.state.result))
+            self.state.value_1 = str(self.display_value_1.text())
+            self.state.current_operator = str(self.display_operator.text())
+            self.display_value_2.clear()
+            self.display_result.clear()
+            print(self.state.value_1)
+            print(self.state.current_operator)
 
     def clear_screen(self, vlaue: str) -> None:
         """
@@ -224,15 +234,17 @@ class ButtonsCreator:
                 }
 
                 if self.state.current_operator in operations:
-                    result = operations[
+                    self.state.result = operations[
                         self.state.current_operator
                     ](num1, num2)
-                    result = result.quantize(Decimal('0.00'))
-                    self.display_result.setText(str(result))
+                    self.state.result = self.state.result.quantize(
+                        Decimal('0.00'))
+                    self.display_result.setText(str(self.state.result))
                     equation: str = f"{num1} {
                         str(self.state.current_operator)} {num2}"
-                    self.history_manager.new_history(equation, Decimal(result))
-                    self.state = CalculatorState(value_1=str(result))
+                    self.history_manager.new_history(equation,
+                                                     Decimal(self.state.result))
+
                 else:
                     self.display_result.setText("Error: Invalid Operator")
                     self.state = CalculatorState()

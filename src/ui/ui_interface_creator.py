@@ -36,6 +36,7 @@ class InterfaceCreator:
         display_operator (QLabel): Pantalla para el operador
         display_result (QLabel): Pantalla para el resultado
     """
+
     def __init__(self) -> None:
         """
         Inicializa la interfaz gráfica.
@@ -85,7 +86,7 @@ class InterfaceCreator:
             self.display_value_1,
             self.display_value_2,
             self.display_operator,
-            self.display_result
+            self.display_result,
         )
         buttons_layout = buttons_creator.create_buttons()
         main_layout.addLayout(buttons_layout)
@@ -102,7 +103,6 @@ class InterfaceCreator:
         """
         self.main_window.show()
         self.app.exec_()
-
 
 
 # NOTE: agregar las notas del desempaquetado y su funcionamiento.

@@ -9,24 +9,23 @@ conceptos básicos como:
 * Documentación y formato de código con pylint y flake8.
 * Modularización del proyecto y uso de módulos externos
 """
+
 # pylint: disable=E0401
 from src.ui.ui_interface_creator import InterfaceCreator
 from src.database.history_manager_db import HistoryManager
+
 
 # pylint: disable=R0903
 class AppCalculator:
     """
     Clase principal que inicia y gestiona la aplicación de la calculadora.
-
     Esta clase actúa como punto de entrada principal de la aplicación,
     inicializando la interfaz gráfica y gestionando su ejecución. Implementa
     un patrón de diseño simple con una única responsabilidad: iniciar la
     aplicación.
-
     Attributes:
         interface (InterfaceCreator): Instancia de la interfaz gráfica
             de la calculadora.
-
     Example:
         Para iniciar la aplicación:
         >>> app = AppCalculator()
