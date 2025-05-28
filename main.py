@@ -9,13 +9,10 @@ conceptos básicos como:
 * Documentación y formato de código con pylint y flake8.
 * Modularización del proyecto y uso de módulos externos
 """
-
-# pylint: disable=E0401
 from src.ui.ui_interface_creator import InterfaceCreator
 from src.database.history_manager_db import HistoryManager
 
 
-# pylint: disable=R0903
 class AppCalculator:
     """
     Clase principal que inicia y gestiona la aplicación de la calculadora.
@@ -38,12 +35,10 @@ class AppCalculator:
     def main(self) -> None:
         """
         Método principal que inicia la ejecución de la aplicación.
-
         Este método es el punto de entrada principal que inicia la interfaz
         gráfica de la calculadora. No recibe parámetros y no retorna ningún
         valor, su única responsabilidad es iniciar la ejecución de la
         interfaz gráfica.
-
         Returns:
             None
         """

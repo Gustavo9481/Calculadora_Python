@@ -42,7 +42,6 @@ def gestor_database(func: Callable[..., Any]) -> Callable[..., Any]:
                     func(*args, cursor=cursor, **kwargs)
                 finally:
                     cursor.close()
-        # pylint: disable=unused-variable.   # noqa: F841.
         except sqlite3.Error:
             print("Ha ocurrido un error al acceder a la base de datos")
 

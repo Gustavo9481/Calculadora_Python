@@ -3,10 +3,6 @@
 Crea los botones de la interfaz y sus métodos al ser presionados a través de la
 clase ButtonsCreator, empleando un patrón de diseño de factory method.
 """
-# pylint: disable=too-many-arguments
-# pylint: disable=too-many-positional-arguments
-# pylint: disable=too-many-instance-attributes
-# pylint: disable=no-name-in-module
 from decimal import Decimal
 from functools import partial
 from typing import Dict
@@ -14,22 +10,20 @@ from pydantic import BaseModel, Field
 from PyQt5.QtWidgets import QPushButton, QGridLayout
 from core.calculator import Calculator
 from database.history_manager_db import HistoryManager
+
 try:
     from ui_styles import (
-        general_buttons_style,
-        c_buttons_style,
-        equal_buttons_style
+        general_buttons_style, c_buttons_style, equal_buttons_style
     )
 except ModuleNotFoundError:
     from .ui_styles import (
-        general_buttons_style,
-        c_buttons_style,
-        equal_buttons_style
+        general_buttons_style, c_buttons_style, equal_buttons_style
     )
 
 
 class ButtonData(BaseModel):
-    """ Modelo para validar los datos de un botón """
+    """Modelo para validar los datos de un botón"""
+
     text: str
     value: str
     style: str
@@ -39,7 +33,8 @@ class ButtonData(BaseModel):
 
 
 class CalculatorState(BaseModel):
-    """ Modelo para validar el estado de la calculadora """
+    """Modelo para validar el estado de la calculadora"""
+
     value_1: str = ""
     value_2: str = ""
     current_operator: str = ""
@@ -63,12 +58,12 @@ class ButtonsCreator:
     """
 
     def __init__(
-            self,
-            central_widget,
-            display_value_1,
-            display_value_2,
-            display_operator,
-            display_result,
+        self,
+        central_widget,
+        display_value_1,
+        display_value_2,
+        display_operator,
+        display_result,
     ):
         """
         Constructor de la clase ButtonsCreator.
@@ -179,14 +174,11 @@ class ButtonsCreator:
             self.display_value_1.setText(str(self.state.result))
             self.state.current_operator = operator
             self.display_operator.setText(self.state.current_operator)
-            self.state = CalculatorState(
-                value_1=str(self.state.result))
+            self.state = CalculatorState(value_1=str(self.state.result))
             self.state.value_1 = str(self.display_value_1.text())
             self.state.current_operator = str(self.display_operator.text())
             self.display_value_2.clear()
             self.display_result.clear()
-            print(self.state.value_1)
-            print(self.state.current_operator)
 
     def clear_screen(self, vlaue: str) -> None:
         """
@@ -219,7 +211,7 @@ class ButtonsCreator:
         if "" not in (
             self.state.value_1,
             self.state.value_2,
-            self.state.current_operator
+            self.state.current_operator,
         ):
             try:
                 calculator = Calculator()
@@ -230,20 +222,20 @@ class ButtonsCreator:
                     "-": calculator.subtract,
                     "*": calculator.multiply,
                     "/": calculator.divide,
-                    "%": calculator.percent
+                    "%": calculator.percent,
                 }
 
                 if self.state.current_operator in operations:
-                    self.state.result = operations[
-                        self.state.current_operator
-                    ](num1, num2)
+                    op = self.state.current_operator
+                    self.state.result = operations[op](num1, num2)
                     self.state.result = self.state.result.quantize(
-                        Decimal('0.00'))
+                        Decimal("0.00"))
                     self.display_result.setText(str(self.state.result))
                     equation: str = f"{num1} {
                         str(self.state.current_operator)} {num2}"
-                    self.history_manager.new_history(equation,
-                                                     Decimal(self.state.result))
+                    self.history_manager.new_history(
+                        equation, Decimal(self.state.result)
+                    )
 
                 else:
                     self.display_result.setText("Error: Invalid Operator")
