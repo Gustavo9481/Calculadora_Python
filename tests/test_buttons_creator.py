@@ -1,26 +1,19 @@
 # MODULO: tests/test_buttons_creator.py
-"""
-Tests unitarios para la clase ButtonsCreator. -> ui_buttons_creator.py
+""" Tests unitarios para la clase ButtonsCreator. -> ui_buttons_creator.py
 Tests unitarios ejecutados a través de pytest. Config -> pyproject.toml.
 Total tests => 1/41
 """
-# pylint: disable=import-error
-# pylint: disable=invalid-name
-# pylint: disable=too-few-public-methods
 from src.ui.ui_buttons_creator import ButtonsCreator
 
 
 # -------------------------------------------------------- class -> MockDisplay
 class MockDisplay:
-    """
-    Mock simple para simular el comportamiento de un QLabel.
-    """
+    """ Mock simple para simular el comportamiento de un QLabel """
     def __init__(self):
         self.text = ""
 
     def setText(self, text: str):
-        """
-        Simula el método setText de QLabel estableciendo el texto.
+        """ Simula el método setText de QLabel estableciendo el texto.
         Args:
             text (str): El texto a establecer
         """
@@ -28,9 +21,8 @@ class MockDisplay:
 
 
 def test_insert_value():
-    """
-    Verifica que el método insert_value() actualice el valor correctamente y
-    las pantallas QLabels.
+    """ Verifica que el método insert_value() actualice el valor correctamente
+    y las pantallas QLabels.
     """
     # Arrange
     central_widget = None

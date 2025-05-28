@@ -1,6 +1,5 @@
 # MODULO: calculator.py
-"""
-Proporciona operaciones aritméticas básicas.
+""" Proporciona operaciones aritméticas básicas.
 implementa una calculadora con operaciones aritméticas fundamentales
 (suma, resta, multiplicación, división y porcentaje) utilizando el tipo Decimal
 para garantizar alta precisión en los cálculos. Las operaciones son
@@ -18,8 +17,7 @@ getcontext().prec = 28
 
 # --------------------------------------------------------- class -> Calculator
 class Calculator:
-    """
-    Realiza operaciones aritméticas básicas utilizando el tipo Decimal para
+    """ Realiza operaciones aritméticas básicas utilizando el tipo Decimal para
     precisión.
     El manejo de la secuencia de operaciones y el estado se hará externamente.
     Métodos: Sin uso de 'self' si el método no usa atributos de instancia pero

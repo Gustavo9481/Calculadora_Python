@@ -1,7 +1,6 @@
 # MODULO: ui_buttons_creator.py
-"""
-Crea los botones de la interfaz y sus métodos al ser presionados a través de la
-clase ButtonsCreator, empleando un patrón de diseño de factory method.
+""" Crea los botones de la interfaz y sus métodos al ser presionados a través 
+de la clase ButtonsCreator, empleando un patrón de diseño de factory method.
 """
 from decimal import Decimal
 from functools import partial
@@ -22,29 +21,26 @@ except ModuleNotFoundError:
 
 
 class ButtonData(BaseModel):
-    """Modelo para validar los datos de un botón"""
-
-    text: str
-    value: str
-    style: str
-    row: int = Field(ge=0, lt=5)
-    column: int = Field(ge=0, lt=4)
-    func: str
+    """ Modelo para validar los datos de un botón """
+    text: str = Field(description="texto que muestra el botón en interfaz")
+    value: str = Field(description="valor que posee el botón")
+    style: str = Field(description="variable con estilos para el botón")
+    row: int = Field(ge=0, lt=5, description="fila ubicación de botón")
+    column: int = Field(ge=0, lt=4, description="columna ubicación de botón")
+    func: str = Field(description="función que desencadena el botón")
 
 
 class CalculatorState(BaseModel):
-    """Modelo para validar el estado de la calculadora"""
-
-    value_1: str = ""
-    value_2: str = ""
-    current_operator: str = ""
-    result: str = ""
+    """ Modelo para validar el estado de la calculadora """
+    value_1: str = Field(default="", description="1° valor de la ecuación")
+    value_2: str = Field(default="", description="2° valor de la ecuación")
+    current_operator: str = Field(default="", description="operador actual")
+    result: str = Field(default="", description="almacén de resultado")
 
 
 # ----------------------------------------------------- class -> ButtonsCreator
 class ButtonsCreator:
-    """
-    Clase para crear y gestionar los botones de la calculadora.
+    """ Clase para crear y gestionar los botones de la calculadora.
     Attributes:
             central_widget (QWidget): Widget central donde estaran los botones.
             display_value_1 (QLabel): Label para mostrar el primer valor.
@@ -65,8 +61,7 @@ class ButtonsCreator:
         display_operator,
         display_result,
     ):
-        """
-        Constructor de la clase ButtonsCreator.
+        """ Constructor de la clase ButtonsCreator.
         Args:
             central_widget (QWidget): Widget central donde estaran los botones.
             display_value_1 (QLabel): Label para mostrar el primer valor.
@@ -84,8 +79,7 @@ class ButtonsCreator:
         self.history_manager = HistoryManager()
 
     def create_buttons(self) -> QGridLayout:
-        """
-        Crea los botones de la calculadora y establece la conexión con las
+        """ Crea los botones de la calculadora y establece la conexión con las
         funciones correspondientes.
         Returns:
             QGridLayout: Layout que contiene los botones.
@@ -126,8 +120,7 @@ class ButtonsCreator:
         return buttons_layout
 
     def get_buttons(self) -> dict:
-        """
-        Obtiene el diccionario de botones creados.
+        """ Obtiene el diccionario de botones creados.
         Returns:
             dict: Diccionario donde las claves son los textos de los botones
                   y los valores son los objetos QPushButton correspondientes.
@@ -135,8 +128,7 @@ class ButtonsCreator:
         return self.buttons
 
     def insert_value(self, value: str) -> None:
-        """
-        Inserta un valor numérico o un punto decimal en la pantalla.
+        """ Inserta un valor numérico o un punto decimal en la pantalla.
         Solo permite un punto decimal por número.
         Args:
             value (str): Valor numérico o punto a insertar.
@@ -161,14 +153,14 @@ class ButtonsCreator:
             self.display_value_2.setText(self.state.value_2)
 
     def insert_operator(self, operator: str) -> None:
-        """
-        Inserta un operador en la pantalla correspondiente.
+        """ Inserta un operador en la pantalla correspondiente.
         Args:
             operador: operador correspondiente a la ecuación.
         """
         if self.state.value_1 != "" and self.state.value_2 == "":
             self.state.current_operator = operator
             self.display_operator.setText(self.state.current_operator)
+
         elif self.state.value_1 != "" and self.state.value_2 != "":
             self.calculate_result("=")
             self.display_value_1.setText(str(self.state.result))
@@ -181,9 +173,7 @@ class ButtonsCreator:
             self.display_result.clear()
 
     def clear_screen(self, vlaue: str) -> None:
-        """
-        Limpia las pantallas al prsionar botón C.
-        """
+        """ Limpia las pantallas al prsionar botón C. """
         self.display_value_1.clear()
         self.display_value_2.clear()
         self.display_operator.clear()
@@ -191,9 +181,7 @@ class ButtonsCreator:
         self.state = CalculatorState()
 
     def delete_last_char(self, value: str) -> None:
-        """
-        Borra último carácter de la entrada actual al presionar la tecla '"'.
-        """
+        """ Borra último carácter de la entrada actual al presionar <- """
         if self.state.current_operator == "":
             self.state.value_1 = self.state.value_1[:-1]
             self.display_value_1.setText(self.state.value_1)
@@ -202,8 +190,7 @@ class ButtonsCreator:
             self.display_value_2.setText(self.state.value_2)
 
     def calculate_result(self, value: str) -> None:
-        """
-        Convierte los valores a tipo Decimal, realiza el cálculo
+        """ Convierte los valores a tipo Decimal, realiza el cálculo
         correspondiente al operador y muestra el resultado.
         Crea un nuevo registro en la base de datos con la ecuación y el
         resultado usando la clase HistoryManager.(Singleton).

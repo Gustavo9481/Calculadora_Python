@@ -1,6 +1,5 @@
 # MODULO: history_manager_db.py
-"""
-Módulo encargad de gestionar el historial de operaciones
+""" Módulo encargad de gestionar el historial de operaciones
 resgistradas enHISTORY_MANAGER -> la base de datos SQLite (calcyulator_db.db).
 Usa el decorador gestor_database para manejar la conexión a la base de datos.
 Implementa la clase HistoryManager que sigue el patrón Singleton para asegurar
@@ -18,8 +17,7 @@ db_connect = sqlite3.connect(db_path)
 
 # ------------------------------------------------------------- gestor_database
 def gestor_database(func: Callable[..., Any]) -> Callable[..., Any]:
-    """
-    Decorador para manejar conexión a la base de datos SQLite y el cursor.
+    """ Decorador para manejar conexión a la base de datos SQLite y el cursor.
     Abre una conexión a la base de datos SQLite,crear un cursor, ejecutar
     función decorada con el cursor y luego cerrar el cursor.
     Maneja cualquier error de la base de datos que pueda ocurrir durante la
@@ -50,8 +48,7 @@ def gestor_database(func: Callable[..., Any]) -> Callable[..., Any]:
 
 # ----------------------------------------------------- class -> HistoryManager
 class HistoryManager:
-    """
-    Gestiona las operaciones create-read-delete en la base de datos.
+    """ Gestiona las operaciones create-read-delete en la base de datos.
     Esta clase implementa el patrón Singleton para asegurar una única
     instancia de conexión.
     """
@@ -65,8 +62,7 @@ class HistoryManager:
 
     @gestor_database
     def create_table(self, cursor=None) -> None:
-        """
-        Verifica si la tabla ya existe, si no existe la crea.
+        """ Verifica si la tabla ya existe, si no existe la crea.
         Args:
             cursor: conexión a base de datos proporcionado por el decorador.
         Returns:
@@ -87,8 +83,7 @@ class HistoryManager:
             history_equation: str,
             history_result: Decimal,
             cursor=None) -> None:
-        """
-        Agrega un nuevo registro (ecuación y resultado) al historial (DB).
+        """ Agrega un nuevo registro (ecuación y resultado) al historial (DB).
         Args:
             history_equation (str): La ecuación a guardar
             history_result (Decimal): El resultado de la ecuación
@@ -110,8 +105,7 @@ class HistoryManager:
 
     @gestor_database
     def delete_history(self, cursor=None) -> None:
-        """
-        Elimina el historial de la base de datos.
+        """ Elimina el historial de la base de datos.
         Args:
             cursor: Conexión a base de datos proporcionada por el decorador.
         """
@@ -119,8 +113,7 @@ class HistoryManager:
 
     @gestor_database
     def get_last_records(self, limit=5, cursor=None) -> list:
-        """
-        Obtiene los últimos registros del historial.
+        """ Obtiene los últimos registros del historial.
         Args:
             limit: Número máximo de registros a obtener (por defecto 5).
             cursor: Conexión a base de datos proporcionada por el decorador.

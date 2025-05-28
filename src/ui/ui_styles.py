@@ -1,6 +1,5 @@
 # MODULO: ui_styles.py
-"""
-Almacena las variables de los estilos CSS para los elementos de la interfaz:
+""" Almacena las variables de los estilos CSS para los elementos de la interfaz
     - Pantallas (QLabel)
     - Botones (QPushButton)
 """
@@ -21,7 +20,6 @@ style_res: str = """
 """
 
 # ---------------------------------------------------------- Estilos de botones
-
 # Estilos para botones generales
 general_buttons_style: str = """
     QPushButton {
@@ -43,7 +41,7 @@ general_buttons_style: str = """
     }
 """
 
-# Estilos para botón de borrar de signo "󰯲"
+# Estilos para botón de borrar de signo 󰯲
 c_buttons_style: str = """
     QPushButton {
         background-color: #12151B;
@@ -66,19 +64,19 @@ c_buttons_style: str = """
     }
 """
 
-# Estilos para botón de igual "="
+# Estilos para botón de igual '='
 equal_buttons_style: str = """
     QPushButton {
         background-color: #E63946;
-        color: #A8DADC;
+        color:  #A8DADC;
         height: 50px;
         border: none;
         border-radius: 10px;
         font-size: 17px;
     }
-    QPushButton:pressed {
+    QPushButton: pressed {
         background-color: #0B0E14;
-        color: #A8DADC;
+        color:  #A8DADC;
         height: 50px;
         border: none;
         border-radius: 10px;
@@ -86,3 +84,4 @@ equal_buttons_style: str = """
         font-weight: bold;
     }
 """
+

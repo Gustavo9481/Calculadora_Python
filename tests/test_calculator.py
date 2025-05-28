@@ -1,6 +1,5 @@
 # MODULO: test_buttons_creator.py
-"""
-Módulo de tests unitarios para los métodos de la clase Calculator.
+""" Módulo de tests unitarios para los métodos de la clase Calculator.
  -> src/core/calculator.py
 Tests unitarios ejecutados a través de pytest. Config -> pyproject.toml.
 Total de test => 36/41

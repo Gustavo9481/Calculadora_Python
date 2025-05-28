@@ -1,6 +1,5 @@
 # MODULO: test_history_manager.py
-"""
-Pruebas unitarias para la clase HistoryManager -> database.history_manager_db.
+""" Pruebas unitarias para la clase HistoryManager -> history_manager_db.
 Test totales => 4/41
 """
 from decimal import Decimal
@@ -15,8 +14,7 @@ class TestHistoryManager:
 
     @pytest.fixture
     def history_manager(self):
-        """
-        Proporciona una instancia de HistoryManager para las pruebas.
+        """ Proporciona una instancia de HistoryManager para las pruebas.
         Este fixture crea y devuelve una nueva instancia de HistoryManager que
         puede ser utilizada en las pruebas para gestionar el historial.
         """
@@ -24,8 +22,7 @@ class TestHistoryManager:
 
     @pytest.fixture
     def memory_db_connection(self):
-        """
-        Proporciona una conexión temporal a una base de datos SQLite en
+        """ Proporciona una conexión temporal a una base de datos SQLite en
         memoria para pruebas.
         Este fixture crea una base de datos SQLite en memoria que:
         - Se inicializa antes de cada prueba.
@@ -47,8 +44,7 @@ class TestHistoryManager:
             memory_db_connection,
             mocker
     ):
-        """
-        Verifica la inserción de un registro individual en la base de datos.
+        """ Verifica la inserción de un registro individual en la base de datos
         Esta prueba unitaria valida el funcionamiento básico de new_history al:
         - Insertar una operación matemática simple (2+2)
         - Verificar la correcta conversión de tipos (Decimal a str)
@@ -151,7 +147,7 @@ class TestHistoryManager:
         memory_db_connection,
         mocker
     ):
-        """Verifica que delete_history elimina todos los registros.
+        """ Verifica que delete_history elimina todos los registros.
         Esta prueba valida que:
         - El método elimina correctamente todos los registros de la tabla
         - Funciona correctamente incluso cuando la tabla está vacía
@@ -196,7 +192,7 @@ class TestHistoryManager:
         cursor.close()
 
     def test_singleton_pattern(self):
-        """Verifica que HistoryManager implementa correctamente el patrón
+        """ Verifica que HistoryManager implementa correctamente el patrón
         Singleton.
         Esta prueba valida que:
         - Múltiples instanciaciones retornan el mismo objeto

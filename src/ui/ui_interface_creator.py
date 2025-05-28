@@ -1,6 +1,5 @@
 # MODULO: ui_inteface_creator.py
-"""
-Módulo encargado de la creación de la interfaz gráfica de la calculadora.
+""" Módulo encargado de la creación de la interfaz gráfica de la calculadora.
 Este módulo implementa el patrón Factory para crear los componentes de la UI:
 - Pantallas (valores y operadores)
 - Botones (números y operaciones)
@@ -9,7 +8,6 @@ Uso:
     interface = InterfaceCreator()
     interface.run()
 """
-# pylint: disable=E0611,E0401
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -22,8 +20,7 @@ from .ui_buttons_creator import ButtonsCreator
 
 # --------------------------------------------------- class -> InterfaceCreator
 class InterfaceCreator:
-    """
-    Clase que gestiona la creación y configuración de la interfaz gráfica.
+    """ Clase que gestiona la creación y configuración de la interfaz gráfica.
     Implementa el patrón Factory para:
     - Crear y configurar pantallas usando ScreensCreator
     - Crear y configurar botones usando ButtonsCreator
@@ -38,8 +35,7 @@ class InterfaceCreator:
     """
 
     def __init__(self) -> None:
-        """
-        Inicializa la interfaz gráfica.
+        """ Inicializa la interfaz gráfica.
         Este método crea la aplicación Qt y la ventana principal, y configura
         la interfaz llamando a _setup_window().
         """
@@ -48,8 +44,7 @@ class InterfaceCreator:
         self._setup_window()
 
     def _setup_window(self) -> None:
-        """
-        Configura la ventana principal y sus componentes.
+        """ Configura la ventana principal y sus componentes.
         Este método:
         1. Configura propiedades básicas de la ventana (título, tamaño, estilo)
         2. Crea el widget central y su layout principal
@@ -94,8 +89,7 @@ class InterfaceCreator:
         self.main_window.setCentralWidget(central_widget)
 
     def run(self) -> None:
-        """
-        Inicia la aplicación.
+        """ Inicia la aplicación.
         Este método:
         1. Muestra la ventana principal
         2. Inicia el bucle de eventos de Qt
