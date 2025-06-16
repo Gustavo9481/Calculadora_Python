@@ -1,10 +1,15 @@
 # MODULO: ui_inteface_creator.py
-""" Módulo encargado de la creación de la interfaz gráfica de la calculadora.
+"""
+Módulo encargado de la creación de la interfaz gráfica de la calculadora.
+
 Este módulo implementa el patrón Factory para crear los componentes de la UI:
+
 - Pantallas (valores y operadores)
 - Botones (números y operaciones)
 - Layout principal
-Uso:
+
+Uso::
+
     interface = InterfaceCreator()
     interface.run()
 """
@@ -20,32 +25,40 @@ from .ui_buttons_creator import ButtonsCreator
 
 # --------------------------------------------------- class -> InterfaceCreator
 class InterfaceCreator:
-    """ Clase que gestiona la creación y configuración de la interfaz gráfica.
+    """
+    Clase que gestiona la creación y configuración de la interfaz gráfica.
+
     Implementa el patrón Factory para:
+
     - Crear y configurar pantallas usando ScreensCreator
     - Crear y configurar botones usando ButtonsCreator
     - Organizar el layout principal de la aplicación
-    Attributes:
-        app (QApplication): Instancia de la aplicación Qt
-        main_window (QMainWindow): Ventana principal de la aplicación
-        display_value_1 (QLabel): Pantalla para el primer valor
-        display_value_2 (QLabel): Pantalla para el segundo valor
-        display_operator (QLabel): Pantalla para el operador
-        display_result (QLabel): Pantalla para el resultado
+
+    :ivar app: Instancia de la aplicación Qt
+    :ivar main_window: Ventana principal de la aplicación
+    :ivar display_value_1: Pantalla para el primer valor
+    :ivar display_value_2: Pantalla para el segundo valor
+    :ivar display_operator: Pantalla para el operador
+    :ivar display_result: Pantalla para el resultado
     """
 
     def __init__(self) -> None:
-        """ Inicializa la interfaz gráfica.
+        """
+        Inicializa la interfaz gráfica.
+
         Este método crea la aplicación Qt y la ventana principal, y configura
-        la interfaz llamando a _setup_window().
+        la interfaz llamando a :meth:`_setup_window`.
         """
         self.app = QApplication([])
         self.main_window = QMainWindow()
         self._setup_window()
 
     def _setup_window(self) -> None:
-        """ Configura la ventana principal y sus componentes.
+        """
+        Configura la ventana principal y sus componentes.
+
         Este método:
+
         1. Configura propiedades básicas de la ventana (título, tamaño, estilo)
         2. Crea el widget central y su layout principal
         3. Crea y configura las pantallas usando ScreensCreator
@@ -89,8 +102,11 @@ class InterfaceCreator:
         self.main_window.setCentralWidget(central_widget)
 
     def run(self) -> None:
-        """ Inicia la aplicación.
+        """
+        Inicia la aplicación.
+
         Este método:
+
         1. Muestra la ventana principal
         2. Inicia el bucle de eventos de Qt
         3. Espera a que el usuario cierre la aplicación
@@ -102,9 +118,10 @@ class InterfaceCreator:
 # NOTE: agregar las notas del desempaquetado y su funcionamiento.
 """
 El patrón Factory se utiliza aquí porque:
-Encapsula la lógica de creación de objetos (pantallas y botones)
-Permite crear diferentes tipos de objetos (pantallas con diferentes estilos)
-Centraliza la creación de objetos en clases específicas
-Facilita el mantenimiento y modificación del código
-Hace el código más modular y reutilizable
+
+- Encapsula la lógica de creación de objetos (pantallas y botones)
+- Permite crear diferentes tipos de objetos (pantallas con diferentes estilos)
+- Centraliza la creación de objetos en clases específicas
+- Facilita el mantenimiento y modificación del código
+- Hace el código más modular y reutilizable
 """

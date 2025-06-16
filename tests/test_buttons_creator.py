@@ -9,6 +9,7 @@ from src.ui.ui_buttons_creator import ButtonsCreator
 # -------------------------------------------------------- class -> MockDisplay
 class MockDisplay:
     """ Mock simple para simular el comportamiento de un QLabel """
+
     def __init__(self):
         self.text = ""
 

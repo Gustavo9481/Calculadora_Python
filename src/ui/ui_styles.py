@@ -1,5 +1,6 @@
 # MODULO: ui_styles.py
-""" Almacena las variables de los estilos CSS para los elementos de la interfaz
+"""
+Almacena las variables de los estilos CSS para los elementos de la interfaz
     - Pantallas (QLabel)
     - Botones (QPushButton)
 """
@@ -84,4 +85,3 @@ equal_buttons_style: str = """
         font-weight: bold;
     }
 """
-

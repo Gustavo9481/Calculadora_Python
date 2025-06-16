@@ -1,5 +1,7 @@
 # MODULO: ui_buttons_creator.py
-""" Crea y gestiona las pantallas QLabel de la interfaz de la calculadora. """
+"""
+Crea y gestiona las pantallas QLabel de la interfaz de la calculadora.
+"""
 
 from typing import Optional
 from pydantic import BaseModel, Field
@@ -15,7 +17,19 @@ from .ui_styles import style_eq, style_res
 
 # ------------------------------------------------------- class -> ScreenConfig
 class ScreenConfig(BaseModel):
-    """ Modelo para validar la configuración de pantallas """
+    """
+    Modelo para validar la configuración de pantallas.
+
+    :param style: Estilo CSS para la pantalla.
+    :type style: str
+    :param alignment: Alineación del texto.
+    :type alignment: int
+    :param size_policy_h: Política de tamaño horizontal.
+    :type size_policy_h: int
+    :param size_policy_v: Política de tamaño vertical.
+    :type size_policy_v: int
+    """
+
     style: str = Field(
         ...,
         description="Estilo CSS para la pantalla")
@@ -32,7 +46,19 @@ class ScreenConfig(BaseModel):
 
 # -------------------------------------------------------- class -> ScreenState
 class ScreenState(BaseModel):
-    """ Modelo para manejar el estado de las pantallas """
+    """
+    Modelo para manejar el estado de las pantallas.
+
+    :param display_value_1: Valor 1 mostrado.
+    :type display_value_1: Optional[str]
+    :param display_operator: Operador mostrado.
+    :type display_operator: Optional[str]
+    :param display_value_2: Valor 2 mostrado.
+    :type display_value_2: Optional[str]
+    :param display_result: Resultado mostrado.
+    :type display_result: Optional[str]
+    """
+
     display_value_1: Optional[str] = Field(
         default="",
         description="Valor 1 mostrado")
@@ -49,22 +75,28 @@ class ScreenState(BaseModel):
 
 # ------------------------------------------------------ class -> ScreenFactory
 class ScreenFactory:
-    """ Clase (Factoría) para crear y configurar pantallas de la interfaz.
-    pattern -> Factory
+    """
+    Clase (Factoría) para crear y configurar pantallas de la interfaz.
+
+    :Design Pattern: Factory
     """
 
     def __init__(self, style: str) -> None:
-        """ Inicializa el factoría de pantallas.
-        Args:
-            style (str): Estilo CSS para las pantallas
+        """
+        Inicializa el factoría de pantallas.
+
+        :param style: Estilo CSS para las pantallas.
+        :type style: str
         """
         self.config = ScreenConfig(style=style)
 
     def create_screen(self) -> QLabel:
-        """ Crea y configura una pantalla (QLabel) con estilo y alineación
+        """
+        Crea y configura una pantalla (QLabel) con estilo y alineación
         especificados.
-        Returns:
-            QLabel: Objeto QLabel configurado con estilo y alineación
+
+        :return: Objeto QLabel configurado con estilo y alineación.
+        :rtype: QLabel
         """
         label = QLabel()
         label.setAlignment(
@@ -83,25 +115,33 @@ class ScreenFactory:
 
 # ----------------------------------------------------- class -> ScreensCreator
 class ScreensCreator:
-    """ Clase para crear y gestionar las pantallas de la calculadora.
+    """
+    Clase para crear y gestionar las pantallas de la calculadora.
+
     Esta clase se encarga de crear las diferentes pantallas de la calculadora:
+
     - Pantalla valor 1
     - Pantalla operador
     - Pantalla valor 2
     - Pantalla resultado
+
     Las pantallas son objetos QLabel con estilos y alineación a la derecha.
-    Atributos de clase:
-        style_eq (str): CSS pantallas de entrada (valor 1, operador y valor 2)
-        style_res (str): CSS pantalla de resultado
+
+    :cvar style_eq: CSS pantallas de entrada (valor 1, operador y valor 2).
+    :type style_eq: str
+    :cvar style_res: CSS pantalla de resultado.
+    :type style_res: str
     """
     # Estilos para las pantallas.
     style_eq: str = style_eq
     style_res: str = style_res
 
     def __init__(self, main_window: QMainWindow):
-        """ Inicializa el creador de pantallas.
-        Args:
-            main_window (QMainWindow): Ventana principal de la aplicación
+        """
+        Inicializa el creador de pantallas.
+
+        :param main_window: Ventana principal de la aplicación.
+        :type main_window: QMainWindow
         """
         self.main_window = main_window
         self.display_value_1 = None
@@ -111,14 +151,18 @@ class ScreensCreator:
         self.state = ScreenState()
 
     def create_screens(self) -> tuple:
-        """ Crea y configura todas las pantallas de la calculadora.
-        Returns:
-            tuple: Una tupla que contiene:
-                - main_layout: Layout vertical que contiene todas las pantallas
-                - display_value_1: Pantalla para mostrar el primer valor
-                - display_value_2: Pantalla para mostrar el segundo valor
-                - display_operator: Pantalla para mostrar el operador
-                - display_result: Pantalla para mostrar el resultado
+        """
+        Crea y configura todas las pantallas de la calculadora.
+
+        :return: Una tupla que contiene:
+
+            - main_layout: Layout vertical con todas las pantallas.
+            - display_value_1: Pantalla para mostrar el primer valor.
+            - display_value_2: Pantalla para mostrar el segundo valor.
+            - display_operator: Pantalla para mostrar el operador.
+            - display_result: Pantalla para mostrar el resultado.
+
+        :rtype: tuple
         """
         main_layout = QVBoxLayout()
 
