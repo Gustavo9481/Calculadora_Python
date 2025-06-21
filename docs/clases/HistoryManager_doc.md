@@ -29,8 +29,10 @@ class HistoryManager:
 - Centralización del acceso: Toda interacción con el historial pasa por una única instancia coherente.
 
 ---
+
 ## Diagrama UML
-![HistoryManager UML](uml/uml_history_manager.svg)
+
+![HistoryManager UML - Diagrama de clase](./clases_uml/uml_history_manager.svg)
 
 ---
 ## Métodos principales

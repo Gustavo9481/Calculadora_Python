@@ -11,17 +11,18 @@ theme:
   palette:
     # Palette toggle for light mode
     - scheme: default
+      primary: custom
       toggle:
-        icon: material/brightness-7 
+        icon: material/brightness-7
         name: Switch to dark mode
     # Palette toggle for dark mode
     - scheme: slate
+      primary: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
   font:
     code: JetBrainsMono Nerd Font
-
 
   icon:
     repo: fontawesome/brands/git-alt
@@ -38,13 +39,23 @@ theme:
     - search.suggest
     - content.code.copy
 
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - Home: index.md
   - Clases:
-    - Calculator: Clases/Calculator_doc.md
-    - HistoryTableDB: Clases/HistoryTableDB_doc.md
-    - HistoryManager: Clases/HistoryManager_doc.md
-    - ButtonsCreator: Clases/ButtonsCreator_doc.md
+    - AppCalculator: clases/AppCalculator_doc.md
+    - Calculator: clases/Calculator_doc.md
+    - HistoryTableDB: clases/HistoryTableDB_doc.md
+    - HistoryManager: clases/HistoryManager_doc.md
+    - ButtonsCreator: clases/ButtonsCreator_doc.md
+    - ScreensCreator: clases/ScreensCreator_doc.md
+    - InterfaceCreator: clases/InterfaceCreator_doc.md
+  - Tests:
+    - Calculator: tests/test_Calculator_doc.md
+    - ButtonsCreator: tests/test_ButtonsCreator_doc.md
+    - HistoryManager: tests/test_HistoryManager_doc.md
 
 plugins:
   - search

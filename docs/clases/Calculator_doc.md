@@ -32,7 +32,7 @@ class Calculator:
     @lru_cache(maxsize=1000)
     def add(value_1: Decimal, value_2: Decimal) -> Decimal:
         return value_1 + value_2
-    # ... otras operaciones similares
+    # ... resto de operaciones similares (resta, multiplicación, división, porcentaje)
 ```
 
 #### Por qué este patrón y sus ventajas
@@ -50,8 +50,7 @@ class Calculator:
 
 ## Diagrama UML
 
-![Calculatro UML](uml/uml_calculator.svg)
-
+![Calculator UML - Diagrama de clase](./clases_uml/uml_calculator.svg)
 ---
 
 ## Métodos principales

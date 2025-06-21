@@ -1,5 +1,6 @@
 # MODULO: test_history_manager.py
-""" Pruebas unitarias para la clase HistoryManager -> history_manager_db.
+"""
+Pruebas unitarias para la clase HistoryManager -> history_manager_db.
 Test totales => 4/41
 """
 from decimal import Decimal
@@ -10,29 +11,60 @@ from database.history_manager_db import HistoryManager
 
 
 class TestHistoryManager:
-    """ Pruebas unitarias para la clase HistoryManager """
+    """
+    Pruebas unitarias para la clase HistoryManager.
+
+    Esta clase contiene un conjunto completo de pruebas unitarias diseñadas
+    para validar el correcto funcionamiento de la clase HistoryManager, que
+    se encarga de gestionar el historial de operaciones matemáticas en una
+    base de datos SQLite.
+
+    Las pruebas cubren las siguientes funcionalidades:
+
+    * Inserción de nuevos registros de historial
+    * Recuperación de los últimos registros
+    * Eliminación completa del historial
+    * Verificación del patrón Singleton
+
+    :note: Utiliza fixtures de pytest para proporcionar instancias de prueba
+           y conexiones a base de datos en memoria.
+    """
 
     @pytest.fixture
     def history_manager(self):
-        """ Proporciona una instancia de HistoryManager para las pruebas.
+        """
+        Proporciona una instancia de HistoryManager para las pruebas.
+
         Este fixture crea y devuelve una nueva instancia de HistoryManager que
-        puede ser utilizada en las pruebas para gestionar el historial.
+        puede ser utilizada en las pruebas para gestionar el historial de
+        operaciones matemáticas.
+
+        :returns: Una instancia fresca de HistoryManager para cada prueba
+        :rtype: HistoryManager
+
+        :note: Se ejecuta antes de cada prueba que lo requiera, garantizando
+               un estado limpio para cada test.
         """
         return HistoryManager()
 
     @pytest.fixture
     def memory_db_connection(self):
-        """ Proporciona una conexión temporal a una base de datos SQLite en
-        memoria para pruebas.
-        Este fixture crea una base de datos SQLite en memoria que:
-        - Se inicializa antes de cada prueba.
-        - Se mantiene disponible durante la ejecución de la prueba.
-        - Se cierra y limpia automáticamente después de cada prueba.
-        Returns:
-            Generator[sqlite3.Connection, None, None]: Un generador que produce
-            una conexión a la base de datos SQLite en memoria. El generador no
-            espera ningún valor de entrada (None) y no retorna ningún valor
-            final (None).
+        """
+        Proporciona una conexión temporal a una base de datos SQLite en
+        memoria.
+
+        Este fixture crea una base de datos SQLite completamente en memoria
+        que:
+
+        * Se inicializa automáticamente antes de cada prueba
+        * Se mantiene disponible durante toda la ejecución del test
+        * Se cierra y limpia automáticamente al finalizar la prueba
+
+        :yields: Conexión activa a la base de datos SQLite en memoria
+        :ytype: sqlite3.Connection
+
+        :note: La base de datos en memoria es ideal para pruebas ya que es
+               rápida, aislada y no deja rastros en el sistema de archivos.
         """
         conn = sqlite3.connect(':memory:')
         yield conn
@@ -44,17 +76,26 @@ class TestHistoryManager:
             memory_db_connection,
             mocker
     ):
-        """ Verifica la inserción de un registro individual en la base de datos
-        Esta prueba unitaria valida el funcionamiento básico de new_history al:
-        - Insertar una operación matemática simple (2+2)
-        - Verificar la correcta conversión de tipos (Decimal a str)
-        - Comprobar que el registro se guardó exactamente como se esperaba
-        - Validar que solo existe un registro en la tabla
-        Notas:
-        - Utiliza una base de datos en memoria para el testing
-        - Hace uso de mocking para aislar la prueba
-        - La ecuación y resultado son valores simples para facilitar la
-          verificación
+        """
+        Verifica la inserción correcta de un registro individual en la BD.
+
+        Esta prueba unitaria valida el funcionamiento básico del método
+        new_history al realizar las siguientes verificaciones:
+
+        * Insertar una operación matemática simple (2+2)
+        * Verificar la correcta conversión de tipos (Decimal a str)
+        * Comprobar que el registro se guardó exactamente como se esperaba
+        * Validar que solo existe un registro en la tabla
+
+        :param history_manager: Instancia de HistoryManager para pruebas
+        :type history_manager: HistoryManager
+        :param memory_db_connection: Conexión a BD en memoria
+        :type memory_db_connection: sqlite3.Connection
+        :param mocker: Objeto mock de pytest para simular dependencias
+        :type mocker: pytest_mock.MockerFixture
+
+        :note: Utiliza mocking para aislar la prueba de dependencias externas
+               y valores simples para facilitar la verificación.
         """
         test_equation = "2+2"
         test_result = Decimal("4")
@@ -93,7 +134,27 @@ class TestHistoryManager:
             memory_db_connection,
             mocker
     ):
-        """ Verifica que get_last_records devuelve los registros correctos."""
+        """
+        Verifica que get_last_records devuelve los registros correctos.
+
+        Esta prueba valida el comportamiento del método get_last_records
+        mediante las siguientes verificaciones:
+
+        * Inserción de 10 registros de prueba en la base de datos
+        * Confirmación de que existen exactamente 10 registros
+        * Verificación de que se pueden recuperar los últimos 5 registros
+        * Validación de que el último registro corresponde al esperado
+
+        :param history_manager: Instancia de HistoryManager para pruebas
+        :type history_manager: HistoryManager
+        :param memory_db_connection: Conexión a BD en memoria
+        :type memory_db_connection: sqlite3.Connection
+        :param mocker: Objeto mock de pytest para simular dependencias
+        :type mocker: pytest_mock.MockerFixture
+
+        :note: Se enfoca en verificación manual de la base de datos ya que
+               el decorador podría no estar retornando valores directamente.
+        """
 
         # Arrange
         mocker.patch.object(
@@ -147,10 +208,28 @@ class TestHistoryManager:
         memory_db_connection,
         mocker
     ):
-        """ Verifica que delete_history elimina todos los registros.
-        Esta prueba valida que:
-        - El método elimina correctamente todos los registros de la tabla
-        - Funciona correctamente incluso cuando la tabla está vacía
+        """
+        Verifica que delete_history elimina todos los registros correctamente.
+
+        Esta prueba valida el comportamiento del método delete_history en
+        diferentes escenarios:
+
+        * Eliminación correcta de todos los registros cuando la tabla contiene
+          datos
+        * Funcionamiento correcto cuando se ejecuta sobre una tabla vacía
+        * Verificación de que no se producen errores en ningún caso
+
+        :param history_manager: Instancia de HistoryManager para pruebas
+        :type history_manager: HistoryManager
+        :param memory_db_connection: Conexión a BD en memoria
+        :type memory_db_connection: sqlite3.Connection
+        :param mocker: Objeto mock de pytest para simular dependencias
+        :type mocker: pytest_mock.MockerFixture
+
+        :raises AssertionError: Si los registros no se eliminan correctamente
+
+        :note: Incluye pruebas de robustez para garantizar que el método
+               es seguro de ejecutar múltiples veces.
         """
         # Arrange
         mocker.patch.object(
@@ -192,11 +271,21 @@ class TestHistoryManager:
         cursor.close()
 
     def test_singleton_pattern(self):
-        """ Verifica que HistoryManager implementa correctamente el patrón
-        Singleton.
-        Esta prueba valida que:
-        - Múltiples instanciaciones retornan el mismo objeto
-        - La identidad de los objetos es la misma
+        """
+        Verifica la implementación correcta del patrón Singleton.
+
+        Esta prueba valida que HistoryManager implementa correctamente el
+        patrón de diseño Singleton mediante las siguientes verificaciones:
+
+        * Múltiples instanciaciones retornan exactamente el mismo objeto
+        * La identidad de los objetos es idéntica (mismo ID en memoria)
+        * Se garantiza una única instancia durante toda la ejecución
+
+        :raises AssertionError: Si el patrón Singleton no está correctamente
+                implementado
+
+        :note: El patrón Singleton es crucial para evitar múltiples conexiones
+               a la base de datos y garantizar consistencia en el historial.
         """
         instance1 = HistoryManager()
         instance2 = HistoryManager()

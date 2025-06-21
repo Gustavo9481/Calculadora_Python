@@ -48,7 +48,7 @@ class HistoryTableDB(BaseModel):
 
 ---
 ### Diagrama UML
-![HistoryDB UML](uml/uml_history_db.svg){ width=600 }
+![HistoryTableDB UML - Diagrama de clase](./clases_uml/uml_history_db.svg)
 
 ---
 ## Métodos principales
@@ -158,3 +158,17 @@ if __name__ == "__main__":
     - La función `guardar_operacion_en_db` recibe la instancia `registro` y simula la inserción en la base de datos.
     - En un caso real, esta función generaría y ejecutaría una sentencia SQL o usaría un ORM como SQLAlchemy para persistir el objeto en la tabla `history_table`.
         
+---    
+
+- [[#Propósito y Responsabilidad]]
+    - [[#Características principales]]
+    - [[#Patrón de Diseño aplicado]]
+    - [[#Implementación del patrón]] 
+        - [[#Por qué este patrón y sus ventajas]]
+- [[#Diagrama UML]]
+- [[#Métodos principales]]
+- [[#Dependencias]]
+- [[#Relaciones]]
+- [[#Ejemplo de uso]]
+    - [[#Explicación del ejemplo]]
+    
