@@ -39,7 +39,10 @@ self.display_result = res_screen_factory.create_screen()
 
 ## Diagrama UML
 
-![ScreensCreator UML - Diagrama de clase](./clases_uml/uml_screen_creator.svg)
+<figure markdown="span">
+  ![ScreensCreator - UML](./clases_uml/uml_screen_creator.svg){ width="500" }
+  <figcaption>Clase ScreensCreator</figcaption>
+</figure>
 
 ---
 

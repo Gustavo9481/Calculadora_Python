@@ -32,7 +32,11 @@ class HistoryManager:
 
 ## Diagrama UML
 
-![HistoryManager UML - Diagrama de clase](./clases_uml/uml_history_manager.svg)
+
+<figure markdown="span">
+  ![HistoryManager - UML](./clases_uml/uml_history_manager.svg){ width="400" }
+  <figcaption>Clase HistoryManager</figcaption>
+</figure>
 
 ---
 ## Métodos principales

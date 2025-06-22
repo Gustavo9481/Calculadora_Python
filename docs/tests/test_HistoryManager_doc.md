@@ -42,7 +42,10 @@ class TestHistoryManager:
 
 ## Diagrama UML
 
-![tests HistoryManager UML](./tests_uml/uml_tests_HistoryManager.svg)
+<figure markdown="span">
+  ![TestHistoryManager - UML](./tests_uml/uml_tests_HistoryManager.svg){ width="500" }
+  <figcaption>TestHistoryManager</figcaption>
+</figure>
 
 ---
 

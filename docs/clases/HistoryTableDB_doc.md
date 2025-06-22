@@ -48,7 +48,12 @@ class HistoryTableDB(BaseModel):
 
 ---
 ### Diagrama UML
-![HistoryTableDB UML - Diagrama de clase](./clases_uml/uml_history_db.svg)
+
+<figure markdown="span">
+  ![HistoryTableDB - UML](./clases_uml/uml_history_db.svg){ width="400" }
+  <figcaption>Clase HistoryTableDB</figcaption>
+</figure>
+
 
 ---
 ## Métodos principales

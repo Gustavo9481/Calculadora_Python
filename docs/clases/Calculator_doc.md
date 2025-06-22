@@ -50,7 +50,11 @@ class Calculator:
 
 ## Diagrama UML
 
-![Calculator UML - Diagrama de clase](./clases_uml/uml_calculator.svg)
+<figure markdown="span">
+  ![AppCalculator - UML](./clases_uml/uml_calculator.svg){ width="500" }
+  <figcaption>Clase Calculator</figcaption>
+</figure>
+
 ---
 
 ## Métodos principales

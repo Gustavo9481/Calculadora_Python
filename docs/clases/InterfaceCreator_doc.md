@@ -56,7 +56,12 @@ def _setup_window(self) -> None:
 
 ## Diagrama UML
 
-![InterfaceCreator UML - Diagramade clase](./clases_uml/uml_interface_creator.svg)
+<figure markdown="span">
+  ![InterfaceCreator - UML](./clases_uml/uml_interface_creator.svg){ width="300" }
+  <figcaption>Clase InsterfaceCreator</figcaption>
+</figure>
+
+
 ---
 
 ## Métodos principales

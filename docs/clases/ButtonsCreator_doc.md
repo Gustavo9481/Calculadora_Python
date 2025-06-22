@@ -46,7 +46,11 @@ def create_buttons(self) -> QGridLayout:
 
 ---
 ## Diagrama UML
-![ButtonsCreator UML - Diagrama de clase](./clases_uml/uml_buttons_creator.svg)
+
+<figure markdown="span">
+  ![ButtonsCreator - UML](./clases_uml/uml_buttons_creator.svg){ width="400" }
+  <figcaption>Clase ButtonsCreator</figcaption>
+</figure>
 
 ---
 ## Métodos principales

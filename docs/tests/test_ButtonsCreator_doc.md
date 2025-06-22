@@ -3,7 +3,8 @@
 ## Propósito y Responsabilidad
 
 La clase `MockDisplay` es una clase auxiliar utilizada en pruebas unitarias para 
-simular el comportamiento del widget `QLabel` de PyQt5. Su principal objetivo 
+simular el comportamiento del widget `QLabel` de PyQt5 para permitir test
+unitarios sobre la clase `ButtonsCreator`. Su principal objetivo 
 es permitir verificar el flujo y la lógica del programa sin necesidad de una 
 interfaz gráfica real, haciendo posible el testeo automatizado de componentes 
 que interactúan con elementos visuales.
@@ -20,7 +21,11 @@ que interactúan con elementos visuales.
 
 ## Diagrama UML
 
-![UML MockDisplay](./tests_uml/uml_tests_ButtonsCreator.svg)
+
+<figure markdown="span">
+  ![MockDisplay - UML](./tests_uml/uml_tests_ButtonsCreator.svg){ width="500" }
+  <figcaption>Clase MockDisplay</figcaption>
+</figure>
 
 ---
 

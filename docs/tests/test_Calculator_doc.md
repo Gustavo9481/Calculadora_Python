@@ -69,7 +69,10 @@ Pruebas para `Calculator.divide()` en:
 
 ## Diagrama UML 
 
-![TestCalculator UML - Diagrama de clase](./tests_uml/uml_tests_Calculator.svg)
+<figure markdown="span">
+  ![TestCalculator - UML](./tests_uml/uml_tests_Calculator.svg){ width="600" }
+  <figcaption>TestCalculator</figcaption>
+</figure>
 
 ---
 

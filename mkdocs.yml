@@ -53,9 +53,9 @@ nav:
     - ScreensCreator: clases/ScreensCreator_doc.md
     - InterfaceCreator: clases/InterfaceCreator_doc.md
   - Tests:
-    - Calculator: tests/test_Calculator_doc.md
-    - ButtonsCreator: tests/test_ButtonsCreator_doc.md
-    - HistoryManager: tests/test_HistoryManager_doc.md
+    - TestCalculator: tests/test_Calculator_doc.md
+    - MockDisplay: tests/test_ButtonsCreator_doc.md
+    - TestHistoryManager: tests/test_HistoryManager_doc.md
 
 plugins:
   - search
