@@ -58,7 +58,7 @@ def _setup_window(self) -> None:
 
 <figure markdown="span">
   ![InterfaceCreator - UML](./clases_uml/uml_interface_creator.svg){ width="300" }
-  <figcaption>Clase InsterfaceCreator</figcaption>
+  <figcaption>Clase InterfaceCreator</figcaption>
 </figure>
 
 

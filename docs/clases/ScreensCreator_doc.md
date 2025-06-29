@@ -97,8 +97,7 @@ app = QApplication([])
 main_window = QMainWindow()
 
 # Instanciar la clase creadora de pantallas
-creator = ScreensCreator(main
-_window)
+creator = ScreensCreator(main_window)
 
 # Crear pantallas y layout
 layout, val1, val2, op, res = creator.create_screens()

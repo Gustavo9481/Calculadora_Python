@@ -1,4 +1,4 @@
-# Proyecto Calculadora Python
+# Calculadora Python
 
 <p align="center">
   <img src="calculator.svg" alt="Ícono de Calculadora" width="150"/>
@@ -16,7 +16,7 @@
 
 ## Descripción General
 
-**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
+**Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
 
 ## Capturas de Pantalla
 
@@ -69,6 +69,10 @@ La aplicación está diseñada con un enfoque modular, con componentes clave que
 *   **`HistoryManager`**: Maneja todas las interacciones con la base de datos SQLite para almacenar y recuperar el historial de cálculos. Está implementado como un Singleton para asegurar una sola conexión a la base de datos.
 *   **`HistoryTableDB`**: Un Objeto de Transferencia de Datos (DTO) utilizado para manejar registros del historial.
 
+<figure markdown="span">
+  ![Módulos](modulos.svg){ width="400" }
+</figure>
+
 Se emplean varios patrones de diseño para mejorar la estructura y mantenibilidad del código:
 *   **Patrón Fachada**: Utilizado por `AppCalculator` para proporcionar una interfaz simplificada a los subsistemas complejos de inicialización de UI y base de datos.
 *   **Patrón Singleton**: Asegura que `HistoryManager` tenga solo una instancia, gestionando el acceso a la base de datos de forma centralizada.
@@ -93,8 +97,8 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
 
 1.  **Clonar el repositorio (si aplica):**
     ```bash
-    git clone <url-del-repositorio>
-    cd <directorio-del-repositorio>
+    git clone https://github.com/Gustavo9481/Calculadora_Python.git
+    cd proyecto-calculadora-python
     ```
     Si tienes los archivos localmente, navega al directorio raíz del proyecto.
 
@@ -117,7 +121,7 @@ Para ejecutar la aplicación calculadora, ejecuta el script principal desde el d
 ```bash
 python main.py
 ```
-*(Asumiendo que tu script principal de la aplicación es `main.py`. Por favor ajusta si tiene un nombre diferente, ej., `app.py`)*
+
 
 ### Operaciones Básicas
 - **Números:** Haz clic en los botones numéricos para ingresar números
@@ -250,6 +254,3 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICEN
   Hecho con ❤️ por la comunidad de desarrolladores Python
 </p>
 
----
-
-*Este README proporciona una descripción completa del proyecto. Para información más detallada sobre implementación y API, consulta la documentación técnica en la carpeta `docs`.*

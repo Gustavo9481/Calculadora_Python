@@ -162,18 +162,4 @@ if __name__ == "__main__":
 4. **Persistencia simulada**:
     - La función `guardar_operacion_en_db` recibe la instancia `registro` y simula la inserción en la base de datos.
     - En un caso real, esta función generaría y ejecutaría una sentencia SQL o usaría un ORM como SQLAlchemy para persistir el objeto en la tabla `history_table`.
-        
----    
 
-- [[#Propósito y Responsabilidad]]
-    - [[#Características principales]]
-    - [[#Patrón de Diseño aplicado]]
-    - [[#Implementación del patrón]] 
-        - [[#Por qué este patrón y sus ventajas]]
-- [[#Diagrama UML]]
-- [[#Métodos principales]]
-- [[#Dependencias]]
-- [[#Relaciones]]
-- [[#Ejemplo de uso]]
-    - [[#Explicación del ejemplo]]
-    
