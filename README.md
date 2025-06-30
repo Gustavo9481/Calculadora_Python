@@ -21,10 +21,9 @@
 ## Capturas de Pantalla
 
 ### Interfaz Principal
-<figure markdown="span">
-  ![Calculadora Python](docs/CalculadoraPython.png){ width="300" }
-  <figcaption>Clase Calculator</figcaption>
-</figure>
+<p align="center">
+  <img src="docs/CalculadoraPython.png" alt="Interfaz Calculadora" width="300"/>
+</p>
 *Vista principal de la calculadora con botones numéricos y operaciones básicas*
 
 
