@@ -21,16 +21,12 @@
 ## Capturas de Pantalla
 
 ### Interfaz Principal
-![Calculadora Principal](docs/screenshots/main-interface.png)
+<figure markdown="span">
+  ![Calculadora Python](docs/CalculadoraPython.png){ width="300" }
+  <figcaption>Clase Calculator</figcaption>
+</figure>
 *Vista principal de la calculadora con botones numéricos y operaciones básicas*
 
-### Historial de Cálculos
-![Historial](docs/screenshots/history-view.png)
-*Panel de historial mostrando cálculos anteriores*
-
-### Demo en Vivo
-![Demo de la Calculadora](docs/demo.gif)
-*Demostración de las funcionalidades principales*
 
 ## Características
 
