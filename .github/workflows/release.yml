@@ -9,6 +9,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write # Permite que el GITHUB_TOKEN cree y edite releases
+
 # Define los trabajos (jobs) que se ejecutarán.
 jobs:
   # Primer trabajo: construir el ejecutable para Linux.
