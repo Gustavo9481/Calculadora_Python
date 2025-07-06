@@ -71,7 +71,16 @@ jobs:
           python-version: '3.11'
 
       - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        run: |
+          $uv_version = "0.1.19" # Asegúrate de usar la última versión estable de uv
+          $uv_zip = "uv-x86_64-pc-windows-msvc.zip"
+          $uv_url = "https://github.com/astral-sh/uv/releases/download/$uv_version/$uv_zip"
+          
+          New-Item -ItemType Directory -Force -Path "$HOME\.uv"
+          Invoke-WebRequest -Uri $uv_url -OutFile "$HOME\.uv\$uv_zip"
+          Expand-Archive -Path "$HOME\.uv\$uv_zip" -DestinationPath "$HOME\.uv"
+          
+          $env:PATH = "$HOME\.uv;$env:PATH"
 
       - name: Install dependencies
         run: |
