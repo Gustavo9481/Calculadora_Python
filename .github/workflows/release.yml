@@ -36,8 +36,8 @@ jobs:
         run: |
           # Aseguramos que uv esté en el PATH
           export PATH="$HOME/.cargo/bin:$PATH"
-          uv pip install -e .[dev]
-          uv pip install pyinstaller
+          uv pip install --system -e .[dev]
+          uv pip install --system pyinstaller
 
       # 5. Ejecuta PyInstaller para crear el binario.
       - name: Build with PyInstaller
@@ -76,8 +76,8 @@ jobs:
       - name: Install dependencies
         run: |
           $env:PATH = "$HOME\.cargo\bin;" + $env:PATH
-          uv pip install -e .[dev]
-          uv pip install pyinstaller
+          uv pip install --system -e .[dev]
+          uv pip install --system pyinstaller
 
       - name: Build with PyInstaller
         run: |
