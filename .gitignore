@@ -1,0 +1,24 @@
+# Entorno virtual de Python
+/.venv/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+
+# Artefactos de instalación y distribución
+*.egg-info/
+dist/
+build/
+
+# Bases de datos
+*.db
+*.sqlite3
+
+# Cachés de herramientas de desarrollo
+/.pytest_cache/
+/.ruff_cache/
+
+# Configuraciones de IDEs/editores
+/.ropeproject/
+/.vscode/
+/.idea/

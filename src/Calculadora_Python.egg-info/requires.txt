@@ -1,5 +1,0 @@
-pytest>=8.3.5
-ttkbootstrap>=1.10.1
-
-[dev]
-pytest>=8.0.0
