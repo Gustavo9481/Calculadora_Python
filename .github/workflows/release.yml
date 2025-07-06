@@ -75,22 +75,21 @@ jobs:
           $uv_version = "0.1.19" # Asegúrate de usar la última versión estable de uv
           $uv_zip = "uv-x86_64-pc-windows-msvc.zip"
           $uv_url = "https://github.com/astral-sh/uv/releases/download/$uv_version/$uv_zip"
-          
-          New-Item -ItemType Directory -Force -Path "$HOME\.uv"
-          Invoke-WebRequest -Uri $uv_url -OutFile "$HOME\.uv\$uv_zip"
-          Expand-Archive -Path "$HOME\.uv\$uv_zip" -DestinationPath "$HOME\.uv"
-          
-          $env:PATH = "$HOME\.uv;$env:PATH"
+          $uv_install_path = "$HOME\.cargo\bin" # Ruta de instalación consistente con Linux
+
+          New-Item -ItemType Directory -Force -Path $uv_install_path
+          Invoke-WebRequest -Uri $uv_url -OutFile "$HOME\.uv\$uv_zip" # Descarga a un temp
+          Expand-Archive -Path "$HOME\.uv\$uv_zip" -DestinationPath $uv_install_path # Descomprime al destino
+
+          echo "$uv_install_path" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append # Añade al PATH
 
       - name: Install dependencies
         run: |
-          $env:PATH = "$HOME\.cargo\bin;" + $env:PATH
           uv pip install --system -e .[dev]
           uv pip install --system pyinstaller
 
       - name: Build with PyInstaller
         run: |
-          $env:PATH = "$HOME\.cargo\bin;" + $env:PATH
           pyinstaller --noconfirm --onedir --windowed main.py
 
       # Comprime el resultado en un archivo .zip (estándar para Windows).
