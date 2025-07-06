@@ -22,3 +22,8 @@ build/
 /.ropeproject/
 /.vscode/
 /.idea/
+# Build artifacts
+Dockerfile
+dist/
+*.tar.gz
+

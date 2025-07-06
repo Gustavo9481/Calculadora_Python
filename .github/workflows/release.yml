@@ -34,14 +34,16 @@ jobs:
       # 4. Instala las dependencias del proyecto y PyInstaller.
       - name: Install dependencies
         run: |
-          source $HOME/.local/bin/env
+          # Aseguramos que uv esté en el PATH
+          export PATH="$HOME/.cargo/bin:$PATH"
           uv pip install -e .[dev]
           uv pip install pyinstaller
 
       # 5. Ejecuta PyInstaller para crear el binario.
       - name: Build with PyInstaller
         run: |
-          source $HOME/.local/bin/env
+          # Aseguramos que uv esté en el PATH
+          export PATH="$HOME/.cargo/bin:$PATH"
           pyinstaller --noconfirm --onedir --windowed main.py
 
       # 6. Comprime el resultado en un archivo .tar.gz.
@@ -73,13 +75,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          $env:PATH = "$HOME\.local\bin;" + $env:PATH
+          $env:PATH = "$HOME\.cargo\bin;" + $env:PATH
           uv pip install -e .[dev]
           uv pip install pyinstaller
 
       - name: Build with PyInstaller
         run: |
-          $env:PATH = "$HOME\.local\bin;" + $env:PATH
+          $env:PATH = "$HOME\.cargo\bin;" + $env:PATH
           pyinstaller --noconfirm --onedir --windowed main.py
 
       # Comprime el resultado en un archivo .zip (estándar para Windows).
