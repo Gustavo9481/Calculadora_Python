@@ -78,8 +78,8 @@ jobs:
           $uv_install_path = "$HOME\.cargo\bin" # Ruta de instalación consistente con Linux
 
           New-Item -ItemType Directory -Force -Path $uv_install_path
-          Invoke-WebRequest -Uri $uv_url -OutFile "$HOME\.uv\$uv_zip" # Descarga a un temp
-          Expand-Archive -Path "$HOME\.uv\$uv_zip" -DestinationPath $uv_install_path # Descomprime al destino
+          Invoke-WebRequest -Uri $uv_url -OutFile "$uv_install_path\$uv_zip" # Descarga directamente a la ruta de instalación
+          Expand-Archive -Path "$uv_install_path\$uv_zip" -DestinationPath $uv_install_path # Descomprime al destino
 
           echo "$uv_install_path" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append # Añade al PATH
 
