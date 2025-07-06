@@ -1,0 +1,124 @@
+# Nombre del flujo de trabajo que se mostrará en la pestaña Actions de GitHub.
+name: Create Release
+
+# Define cuándo se debe ejecutar este flujo de trabajo.
+# 'on: push: tags:' significa que se activará cuando se suba un nuevo tag a GitHub.
+# El patrón 'v*' asegura que solo se active para tags que empiecen con 'v' (ej. v1.0, v1.0.1).
+on:
+  push:
+    tags:
+      - 'v*'
+
+# Define los trabajos (jobs) que se ejecutarán.
+jobs:
+  # Primer trabajo: construir el ejecutable para Linux.
+  build-linux:
+    # El tipo de máquina virtual que se usará. 'ubuntu-latest' es la última versión estable de Ubuntu.
+    runs-on: ubuntu-latest
+    # Pasos que se ejecutarán en este trabajo.
+    steps:
+      # 1. Descarga el código de tu repositorio a la máquina virtual.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Instala Python en la máquina virtual.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Usamos una versión de Python moderna.
+
+      # 3. Instala uv, nuestro gestor de dependencias.
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      # 4. Instala las dependencias del proyecto y PyInstaller.
+      - name: Install dependencies
+        run: |
+          source $HOME/.local/bin/env
+          uv pip install -e .[dev]
+          uv pip install pyinstaller
+
+      # 5. Ejecuta PyInstaller para crear el binario.
+      - name: Build with PyInstaller
+        run: |
+          source $HOME/.local/bin/env
+          pyinstaller --noconfirm --onedir --windowed main.py
+
+      # 6. Comprime el resultado en un archivo .tar.gz.
+      - name: Package the build
+        run: tar -czvf calculator-linux.tar.gz -C dist/main .
+
+      # 7. Guarda el archivo .tar.gz como un "artefacto" para que otros trabajos puedan usarlo.
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculator-linux
+          path: calculator-linux.tar.gz
+
+  # Segundo trabajo: construir el ejecutable para Windows.
+  build-windows:
+    # Se ejecuta en una máquina virtual de Windows.
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install dependencies
+        run: |
+          $env:PATH = "$HOME\.local\bin;" + $env:PATH
+          uv pip install -e .[dev]
+          uv pip install pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          $env:PATH = "$HOME\.local\bin;" + $env:PATH
+          pyinstaller --noconfirm --onedir --windowed main.py
+
+      # Comprime el resultado en un archivo .zip (estándar para Windows).
+      - name: Package the build
+        run: Compress-Archive -Path dist/main/* -DestinationPath calculator-windows.zip
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculator-windows
+          path: calculator-windows.zip
+
+  # Tercer trabajo: crear el Release en GitHub.
+  create-release:
+    # Este trabajo necesita (needs) que los dos anteriores terminen con éxito.
+    needs: [build-linux, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Descarga el artefacto de Linux que guardamos antes.
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: calculator-linux
+
+      # 2. Descarga el artefacto de Windows.
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: calculator-windows
+
+      # 3. Crea la página de Release en GitHub.
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # El nombre del tag que disparó el flujo de trabajo se usa como nombre del release.
+          tag_name: ${{ github.ref_name }}
+          # El cuerpo del release contendrá un mensaje simple.
+          body: "Release automático para la versión ${{ github.ref_name }}."
+          # Adjunta los archivos que descargamos.
+          files: |
+            calculator-linux.tar.gz
+            calculator-windows.zip

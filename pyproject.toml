@@ -5,25 +5,23 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "calculator-app"
 version = "0.1.0"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 dependencies = [
-    "flake8>=7.2.0",
-    # Añadiremos ttkbootstrap aquí después
-    "mkdocs-material>=9.6.14",
-    "pydantic>=2.11.3",
-    "pylint>=3.3.7",
-    "pyqt5>=5.15.11",
-    "pytest-mock>=3.14.0",
+    "pydantic~=1.10"
 ]
 
 # === NUEVA SECCIÓN: Dependencias opcionales ===
 [project.optional-dependencies]
 # Definimos un grupo 'dev' para herramientas de desarrollo
 dev = [
-    "pytest>=8.0.0", # ¡Aquí listamos pytest!
+    "pytest>=8.0.0",
+    "pytest-mock>=3.14.0",
+    "flake8>=7.0.0",
+    "pylint>=3.0.0",
+    "mkdocs-material>=9.0.0"
 ]
 
 # === NUEVA SECCIÓN: Configuración de pytest ===
 [tool.pytest.ini_options]
-testpaths = ["tests"] # Dónde buscar los archivos de prueba
-pythonpath = ["src"]  # Dónde buscar el código fuente de la app
+testpaths = ["tests"]
+pythonpath = ["src"]
