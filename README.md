@@ -6,17 +6,15 @@
 
 
 <p align="center">
-  <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
   <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status">
-  <img src="https://img.shields.io/badge/PyQt-5.15+-orange.svg" alt="PyQt Version">
 </p>
-
 
 
 ## Descripción General
 
-**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
+**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework CustomTkinter (basado en Tkinter) para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
 
 ## Capturas de Pantalla
 
@@ -29,7 +27,7 @@
 
 ## Características
 
-*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por PyQt.
+*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por CustomTkinter.
 *   **Operaciones Aritméticas Estándar:**
     *   Suma (+)
     *   Resta (-)
@@ -47,8 +45,14 @@
 git clone <url-del-repositorio>
 cd proyecto-calculadora-python
 
-# Instalar dependencias
-pip install -r requirements.txt
+# Instalar uv (si no lo tienes)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Crear entorno virtual e instalar dependencias
+uv venv
+source .venv/bin/activate # En Windows: .venv\Scripts\activate
+uv pip install -e .
 
 # Ejecutar la aplicación
 python main.py
@@ -71,8 +75,9 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 
 ## Stack Tecnológico
 
-*   **Lenguaje de Programación:** Python (versión 3.7 o superior)
-*   **Framework GUI:** PyQt (probado con PyQt5, adaptable para PyQt6)
+*   **Lenguaje de Programación:** Python (versión 3.8 o superior)
+*   **Framework GUI:** CustomTkinter (basado en Tkinter)
+*   **Gestor de Dependencias:** uv
 *   **Base de Datos:** SQLite (a través del módulo integrado `sqlite3` de Python)
 *   **Aritmética de Precisión:** Módulo `decimal` de Python
 *   **Caché:** `functools.lru_cache` para optimizar cálculos
@@ -81,8 +86,8 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 
 Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
 
-*   Python 3.7 o más reciente
-*   PIP (instalador de paquetes de Python)
+*   Python 3.8 o más reciente
+*   uv (gestor de paquetes y entorno virtual)
 
 ## Instalación
 
@@ -93,16 +98,18 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
     ```
     Si tienes los archivos localmente, navega al directorio raíz del proyecto.
 
-2.  **Instalar dependencias:**
-    La dependencia externa principal es PyQt. Puedes instalarla usando pip:
+2.  **Instalar uv (si no lo tienes):**
     ```bash
-    pip install PyQt5
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # Asegúrate de que uv esté en tu PATH. Por ejemplo, para bash/zsh:
+    # export PATH="$HOME/.cargo/bin:$PATH"
     ```
-    *(Nota: Si planeas usar una versión diferente, como PyQt6, instala esa en su lugar: `pip install PyQt6`)*
 
-    O usar el archivo de requirements:
+3.  **Crear entorno virtual e instalar dependencias:**
     ```bash
-    pip install -r requirements.txt
+    uv venv
+    source .venv/bin/activate # En Windows: .venv\Scripts\activate
+    uv pip install -e .
     ```
 
 ## Uso
@@ -125,26 +132,19 @@ python main.py
 ```
 .
 ├── main.py                 # Script principal de la aplicación
-├── requirements.txt        # Lista de dependencias
+├── pyproject.toml          # Configuración del proyecto y dependencias (PEP 621)
 ├── src/                    # Directorio del código fuente
-│   ├── app_calculator.py
-│   ├── calculator.py
-│   ├── history_manager.py
-│   ├── interface_creator.py
-│   ├── buttons_creator.py
-│   ├── screens_creator.py
-│   └── history_table_db.py
+│   ├── core/               # Lógica de negocio y cálculo
+│   ├── database/           # Gestión de base de datos
+│   └── ui/                 # Componentes de interfaz de usuario
 ├── docs/                   # Documentación del proyecto
 │   ├── index.md
-│   ├── screenshots/        # Capturas de pantalla
 │   └── calculator.svg      # Ícono del proyecto
 ├── tests/                  # Pruebas unitarias
-│   ├── test_calculator.py
-│   └── test_history.py
-├── database/               # Archivos de base de datos
-│   └── calculator_history.db
+├── .github/                # Configuraciones de GitHub (ej. Workflows de Actions)
+├── .gitignore              # Archivos y directorios ignorados por Git
 ├── LICENSE                 # Archivo de licencia
-└── README.md              # Este archivo
+└── README.md               # Este archivo
 ```
 
 ## Documentación
@@ -153,9 +153,9 @@ Este proyecto utiliza MkDocs para generar documentación. Puedes encontrar infor
 
 Para servir la documentación localmente:
 
-1.  **Instalar MkDocs y el tema Material (si no se ha hecho ya):**
+1.  **Instalar MkDocs y el tema Material (si no se ha hecho ya, usando uv):**
     ```bash
-    pip install mkdocs mkdocs-material
+    uv pip install mkdocs mkdocs-material
     ```
 2.  **Servir la documentación:**
     Desde el directorio raíz del proyecto, ejecuta:
@@ -171,12 +171,13 @@ mkdocs build
 
 ## Roadmap
 
-### Versión Actual (1.0.0)
+### Versión Actual (1.0.6)
 - [x] Operaciones aritméticas básicas (+, -, ×, ÷)
 - [x] Cálculos de porcentaje
 - [x] Historial persistente de cálculos
-- [x] Interfaz gráfica con PyQt
+- [x] Interfaz gráfica con CustomTkinter
 - [x] Arquitectura modular
+- [x] Binarios precompilados para Linux y Windows (vía GitHub Actions)
 
 ### Próximas Versiones
 - [ ] **v1.1.0** - Calculadora Python
@@ -221,12 +222,12 @@ mkdocs build
 git clone https://github.com/tu-usuario/proyecto-calculadora-python.git
 cd proyecto-calculadora-python
 
-# Crear entorno virtual
-python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+# Crear entorno virtual con uv
+uv venv
+source .venv/bin/activate  # En Windows: .venv\Scripts\activate
 
-# Instalar dependencias de desarrollo
-pip install -r requirements-dev.txt
+# Instalar dependencias de desarrollo (incluye pytest, flake8, pylint, mkdocs)
+uv pip install -e .[dev]
 
 # Ejecutar tests
 python -m pytest tests/
@@ -248,6 +249,13 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICEN
 ## Autores
 
 - **[GUScode | Gustavo Colmenares]** - *Desarrollo inicial y mantenimiento* - [Gustavo9481](https://github.com/Gustavo9481)
+
+## Descargas
+
+Puedes descargar las versiones precompiladas de la calculadora para tu sistema operativo desde la página de [GitHub Releases](https://github.com/Gustavo9481/Calculadora_Python/releases).
+
+*   **Linux:** `calculadora-linux.tar.gz`
+*   **Windows:** `calculadora-windows.zip`
 
 ## Agradecimientos
 
