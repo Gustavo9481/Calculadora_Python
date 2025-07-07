@@ -266,7 +266,3 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICEN
 <p align="center">
   Hecho con ❤️ por la comunidad de desarrolladores Python
 </p>
-
----
-
-*Este README proporciona una descripción completa del proyecto. Para información más detallada sobre implementación y API, consulta la documentación técnica en la carpeta `docs`.*
