@@ -9,6 +9,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+*.tar.gz
 
 # Bases de datos
 *.db
@@ -17,13 +18,36 @@ build/
 # Cachés de herramientas de desarrollo
 /.pytest_cache/
 /.ruff_cache/
+.mypy_cache/
 
 # Configuraciones de IDEs/editores
 /.ropeproject/
 /.vscode/
 /.idea/
-# Build artifacts
-Dockerfile
-dist/
-*.tar.gz
+*.sublime-workspace
+*.sublime-project
 
+# Archivos de swap y respaldo de editores (ej. Neovim, Vim)
+*~
+*.swp
+*.swo
+
+# Archivos de registro
+*.log
+*.log.*
+
+# Archivos generados por MkDocs
+/site/
+
+# Archivos de configuración local (si se usan)
+.env
+.flaskenv
+
+# Binarios y ejecutables (si se generan)
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Docker
+Dockerfile

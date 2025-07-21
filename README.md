@@ -14,7 +14,7 @@
 
 ## Descripción General
 
-**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework CustomTkinter (basado en Tkinter) para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
+**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt5 para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
 
 ## Capturas de Pantalla
 
@@ -63,7 +63,7 @@ python main.py
 La aplicación está diseñada con un enfoque modular, con componentes clave que incluyen:
 
 *   **`AppCalculator`**: El orquestador principal de la aplicación. Inicializa la UI y la conexión a la base de datos, actuando como una Fachada para simplificar el proceso de inicio.
-*   **Componentes de UI (`InterfaceCreator`, `ButtonsCreator`, `ScreensCreator`)**: Estas clases son responsables de construir y manejar los diversos elementos de la interfaz gráfica basada en PyQt.
+*   **Componentes de UI (`InterfaceCreator`, `ButtonsCreator`, `ScreensCreator`)**: Estas clases son responsables de construir y manejar los diversos elementos de la interfaz gráfica basada en PyQt5.
 *   **`Calculator`**: Una clase utilitaria sin estado que proporciona métodos estáticos para todas las operaciones aritméticas. Utiliza `Decimal` para precisión y `lru_cache` para optimización de rendimiento.
 *   **`HistoryManager`**: Maneja todas las interacciones con la base de datos SQLite para almacenar y recuperar el historial de cálculos. Está implementado como un Singleton para asegurar una sola conexión a la base de datos.
 *   **`HistoryTableDB`**: Un Objeto de Transferencia de Datos (DTO) utilizado para manejar registros del historial.
@@ -76,7 +76,7 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 ## Stack Tecnológico
 
 *   **Lenguaje de Programación:** Python (versión 3.8 o superior)
-*   **Framework GUI:** CustomTkinter (basado en Tkinter)
+*   **Framework GUI:** PyQt5
 *   **Gestor de Dependencias:** uv
 *   **Base de Datos:** SQLite (a través del módulo integrado `sqlite3` de Python)
 *   **Aritmética de Precisión:** Módulo `decimal` de Python
@@ -175,7 +175,7 @@ mkdocs build
 - [x] Operaciones aritméticas básicas (+, -, ×, ÷)
 - [x] Cálculos de porcentaje
 - [x] Historial persistente de cálculos
-- [x] Interfaz gráfica con CustomTkinter
+- [x] Interfaz gráfica con PyQt5
 - [x] Arquitectura modular
 - [x] Binarios precompilados para Linux y Windows (vía GitHub Actions)
 

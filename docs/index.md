@@ -1,46 +1,39 @@
-# Calculadora Python
+# Proyecto Calculadora Python
 
 <p align="center">
-  <img src="calculator.svg" alt="Ícono de Calculadora" width="150"/>
+  <img src="docs/calculator.svg" alt="Ícono de Calculadora" width="150"/>
 </p>
 
 
 <p align="center">
-  <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
   <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status">
-  <img src="https://img.shields.io/badge/PyQt-5.15+-orange.svg" alt="PyQt Version">
 </p>
-
 
 
 ## Descripción General
 
-**Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
+**Proyecto Calculadora Python** es una aplicación de calculadora de escritorio construida con Python y el framework PyQt5 para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.
 
 ## Capturas de Pantalla
 
 ### Interfaz Principal
-![Calculadora Principal](docs/screenshots/main-interface.png)
+<p align="center">
+  <img src="docs/CalculadoraPython.png" alt="Interfaz Calculadora" width="300"/>
+</p>
 *Vista principal de la calculadora con botones numéricos y operaciones básicas*
 
-### Historial de Cálculos
-![Historial](docs/screenshots/history-view.png)
-*Panel de historial mostrando cálculos anteriores*
-
-### Demo en Vivo
-![Demo de la Calculadora](docs/demo.gif)
-*Demostración de las funcionalidades principales*
 
 ## Características
 
-*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por PyQt.
+*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por CustomTkinter.
 *   **Operaciones Aritméticas Estándar:**
     *   Suma (+)
-    *   Resta (-)
-    *   Multiplicación (×)
-    *   División (÷)
-    *   Porcentaje (%)
+    * Resta (-)
+    * Multiplicación (×)
+    * División (÷)
+    * Porcentaje (%)
 *   **Cálculos de Alta Precisión:** Utiliza el módulo `decimal` de Python para asegurar precisión, especialmente importante para cálculos financieros o científicos.
 *   **Historial Persistente de Cálculos:** Guarda automáticamente el historial de cálculos en una base de datos SQLite local, permitiendo a los usuarios revisar operaciones pasadas.
 *   **Arquitectura Modular:** Separación bien definida de responsabilidades entre la interfaz de usuario, la lógica de cálculo y las capas de persistencia de datos.
@@ -52,8 +45,14 @@
 git clone <url-del-repositorio>
 cd proyecto-calculadora-python
 
-# Instalar dependencias
-pip install -r requirements.txt
+# Instalar uv (si no lo tienes)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Crear entorno virtual e instalar dependencias
+uv venv
+source .venv/bin/activate # En Windows: .venv\Scripts\activate
+uv pip install -e .
 
 # Ejecutar la aplicación
 python main.py
@@ -64,14 +63,10 @@ python main.py
 La aplicación está diseñada con un enfoque modular, con componentes clave que incluyen:
 
 *   **`AppCalculator`**: El orquestador principal de la aplicación. Inicializa la UI y la conexión a la base de datos, actuando como una Fachada para simplificar el proceso de inicio.
-*   **Componentes de UI (`InterfaceCreator`, `ButtonsCreator`, `ScreensCreator`)**: Estas clases son responsables de construir y manejar los diversos elementos de la interfaz gráfica basada en PyQt.
+*   **Componentes de UI (`InterfaceCreator`, `ButtonsCreator`, `ScreensCreator`)**: Estas clases son responsables de construir y manejar los diversos elementos de la interfaz gráfica basada en PyQt5.
 *   **`Calculator`**: Una clase utilitaria sin estado que proporciona métodos estáticos para todas las operaciones aritméticas. Utiliza `Decimal` para precisión y `lru_cache` para optimización de rendimiento.
 *   **`HistoryManager`**: Maneja todas las interacciones con la base de datos SQLite para almacenar y recuperar el historial de cálculos. Está implementado como un Singleton para asegurar una sola conexión a la base de datos.
 *   **`HistoryTableDB`**: Un Objeto de Transferencia de Datos (DTO) utilizado para manejar registros del historial.
-
-<figure markdown="span">
-  ![Módulos](modulos.svg){ width="400" }
-</figure>
 
 Se emplean varios patrones de diseño para mejorar la estructura y mantenibilidad del código:
 *   **Patrón Fachada**: Utilizado por `AppCalculator` para proporcionar una interfaz simplificada a los subsistemas complejos de inicialización de UI y base de datos.
@@ -80,8 +75,9 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 
 ## Stack Tecnológico
 
-*   **Lenguaje de Programación:** Python (versión 3.7 o superior)
-*   **Framework GUI:** PyQt (probado con PyQt5, adaptable para PyQt6)
+*   **Lenguaje de Programación:** Python (versión 3.8 o superior)
+*   **Framework GUI:** PyQt5
+*   **Gestor de Dependencias:** uv
 *   **Base de Datos:** SQLite (a través del módulo integrado `sqlite3` de Python)
 *   **Aritmética de Precisión:** Módulo `decimal` de Python
 *   **Caché:** `functools.lru_cache` para optimizar cálculos
@@ -90,28 +86,30 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 
 Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
 
-*   Python 3.7 o más reciente
-*   PIP (instalador de paquetes de Python)
+*   Python 3.8 o más reciente
+*   uv (gestor de paquetes y entorno virtual)
 
 ## Instalación
 
 1.  **Clonar el repositorio (si aplica):**
     ```bash
-    git clone https://github.com/Gustavo9481/Calculadora_Python.git
-    cd proyecto-calculadora-python
+    git clone <url-del-repositorio>
+    cd <directorio-del-repositorio>
     ```
     Si tienes los archivos localmente, navega al directorio raíz del proyecto.
 
-2.  **Instalar dependencias:**
-    La dependencia externa principal es PyQt. Puedes instalarla usando pip:
+2.  **Instalar uv (si no lo tienes):**
     ```bash
-    pip install PyQt5
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # Asegúrate de que uv esté en tu PATH. Por ejemplo, para bash/zsh:
+    # export PATH="$HOME/.cargo/bin:$PATH"
     ```
-    *(Nota: Si planeas usar una versión diferente, como PyQt6, instala esa en su lugar: `pip install PyQt6`)*
 
-    O usar el archivo de requirements:
+3.  **Crear entorno virtual e instalar dependencias:**
     ```bash
-    pip install -r requirements.txt
+    uv venv
+    source .venv/bin/activate # En Windows: .venv\Scripts\activate
+uv pip install -e .
     ```
 
 ## Uso
@@ -121,18 +119,33 @@ Para ejecutar la aplicación calculadora, ejecuta el script principal desde el d
 ```bash
 python main.py
 ```
-
+*(Asumiendo que tu script principal de la aplicación es `main.py`. Por favor ajusta si tiene un nombre diferente, ej., `app.py`)*
 
 ### Operaciones Básicas
 - **Números:** Haz clic en los botones numéricos para ingresar números
 - **Operaciones:** Usa +, -, ×, ÷ para operaciones básicas
 - **Porcentaje:** Usa el botón % para cálculos de porcentaje
+- **Historial:** Accede al historial desde el menú Ver > Historial
 
 ## Estructura del Proyecto
 
-<figure markdown="span">
-  ![Estructura de archivos](tree.svg){ width="500" }
-</figure>
+```
+.
+├── main.py                 # Script principal de la aplicación
+├── pyproject.toml          # Configuración del proyecto y dependencias (PEP 621)
+├── src/                    # Directorio del código fuente
+│   ├── core/               # Lógica de negocio y cálculo
+│   ├── database/           # Gestión de base de datos
+│   └── ui/                 # Componentes de interfaz de usuario
+├── docs/                   # Documentación del proyecto
+│   ├── index.md
+│   └── calculator.svg      # Ícono del proyecto
+├── tests/                  # Pruebas unitarias
+├── .github/                # Configuraciones de GitHub (ej. Workflows de Actions)
+├── .gitignore              # Archivos y directorios ignorados por Git
+├── LICENSE                 # Archivo de licencia
+└── README.md               # Este archivo
+```
 
 ## Documentación
 
@@ -140,9 +153,9 @@ Este proyecto utiliza MkDocs para generar documentación. Puedes encontrar infor
 
 Para servir la documentación localmente:
 
-1.  **Instalar MkDocs y el tema Material (si no se ha hecho ya):**
+1.  **Instalar MkDocs y el tema Material (si no se ha hecho ya, usando uv):**
     ```bash
-    pip install mkdocs mkdocs-material
+    uv pip install mkdocs mkdocs-material
     ```
 2.  **Servir la documentación:**
     Desde el directorio raíz del proyecto, ejecuta:
@@ -158,12 +171,13 @@ mkdocs build
 
 ## Roadmap
 
-### Versión Actual (1.0.0)
+### Versión Actual (1.0.6)
 - [x] Operaciones aritméticas básicas (+, -, ×, ÷)
 - [x] Cálculos de porcentaje
 - [x] Historial persistente de cálculos
-- [x] Interfaz gráfica con PyQt
+- [x] Interfaz gráfica con PyQt5
 - [x] Arquitectura modular
+- [x] Binarios precompilados para Linux y Windows (vía GitHub Actions)
 
 ### Próximas Versiones
 - [ ] **v1.1.0** - Calculadora Python
@@ -208,12 +222,12 @@ mkdocs build
 git clone https://github.com/tu-usuario/proyecto-calculadora-python.git
 cd proyecto-calculadora-python
 
-# Crear entorno virtual
-python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+# Crear entorno virtual con uv
+uv venv
+source .venv/bin/activate  # En Windows: .venv\Scripts\activate
 
-# Instalar dependencias de desarrollo
-pip install -r requirements-dev.txt
+# Instalar dependencias de desarrollo (incluye pytest, flake8, pylint, mkdocs)
+uv pip install -e .[dev]
 
 # Ejecutar tests
 python -m pytest tests/
@@ -236,6 +250,13 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICEN
 
 - **[GUScode | Gustavo Colmenares]** - *Desarrollo inicial y mantenimiento* - [Gustavo9481](https://github.com/Gustavo9481)
 
+## Descargas
+
+Puedes descargar las versiones precompiladas de la calculadora para tu sistema operativo desde la página de [GitHub Releases](https://github.com/Gustavo9481/Calculadora_Python/releases).
+
+*   **Linux:** `calculadora-linux.tar.gz`
+*   **Windows:** `calculadora-windows.zip`
+
 ## Agradecimientos
 
 - Inspirado por la calculadora estándar de Android.
@@ -253,4 +274,3 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICEN
 <p align="center">
   Hecho con ❤️ por la comunidad de desarrolladores Python
 </p>
-
