@@ -4,9 +4,7 @@ Pruebas unitarias para la clase HistoryManager -> history_manager_db.
 Test totales => 4/41
 """
 from decimal import Decimal
-import sqlite3
 import pytest
-import database.history_manager_db as history_manager_module
 from database.history_manager_db import HistoryManager
 
 
@@ -31,7 +29,7 @@ class TestHistoryManager:
     """
 
     @pytest.fixture
-    def history_manager(self):
+    def history_manager(self, mocker):
         """
         Proporciona una instancia de HistoryManager para las pruebas.
 
@@ -45,36 +43,20 @@ class TestHistoryManager:
         :note: Se ejecuta antes de cada prueba que lo requiera, garantizando
                un estado limpio para cada test.
         """
-        return HistoryManager()
-
-    @pytest.fixture
-    def memory_db_connection(self):
-        """
-        Proporciona una conexión temporal a una base de datos SQLite en
-        memoria.
-
-        Este fixture crea una base de datos SQLite completamente en memoria
-        que:
-
-        * Se inicializa automáticamente antes de cada prueba
-        * Se mantiene disponible durante toda la ejecución del test
-        * Se cierra y limpia automáticamente al finalizar la prueba
-
-        :yields: Conexión activa a la base de datos SQLite en memoria
-        :ytype: sqlite3.Connection
-
-        :note: La base de datos en memoria es ideal para pruebas ya que es
-               rápida, aislada y no deja rastros en el sistema de archivos.
-        """
-        conn = sqlite3.connect(':memory:')
-        yield conn
-        conn.close()
+        # Configura el mock para usar una base de datos en memoria
+        mocker.patch.object(HistoryManager, '_db_path', ':memory:')
+        # Crea una nueva instancia para cada prueba para asegurar aislamiento
+        # Esto requiere resetear el singleton de alguna manera o instanciar una clase base
+        # Para simplificar, vamos a re-instanciar, asumiendo que el estado no persiste entre tests
+        # de una manera que los afecte negativamente gracias a la BD en memoria.
+        HistoryManager._instance = None  # Forza la re-creación del singleton
+        manager = HistoryManager()
+        manager.create_table()  # Asegura que la tabla exista
+        return manager
 
     def test_new_history_inserts_data(
             self,
-            history_manager,
-            memory_db_connection,
-            mocker
+            history_manager
     ):
         """
         Verifica la inserción correcta de un registro individual en la BD.
@@ -89,50 +71,24 @@ class TestHistoryManager:
 
         :param history_manager: Instancia de HistoryManager para pruebas
         :type history_manager: HistoryManager
-        :param memory_db_connection: Conexión a BD en memoria
-        :type memory_db_connection: sqlite3.Connection
-        :param mocker: Objeto mock de pytest para simular dependencias
-        :type mocker: pytest_mock.MockerFixture
 
         :note: Utiliza mocking para aislar la prueba de dependencias externas
                y valores simples para facilitar la verificación.
         """
         test_equation = "2+2"
         test_result = Decimal("4")
-        expected_result_str = "4"
-
-        mocker.patch.object(
-            history_manager_module,
-            'db_connect',
-            memory_db_connection
-        )
-        history_manager.create_table()
+        
         history_manager.new_history(test_equation, test_result)
-        cursor = memory_db_connection.cursor()
-        cursor.execute(
-            "SELECT EQUATION, \
-            RESULT FROM history_results \
-            WHERE EQUATION = ?",
-            (test_equation,)
-        )
-        inserted_data = cursor.fetchone()
-        cursor.close()
-
-        assert inserted_data is not None
-        assert inserted_data[0] == test_equation
-        assert inserted_data[1] == expected_result_str
-
-        cursor = memory_db_connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM history_results")
-        count = cursor.fetchone()[0]
-        cursor.close()
-        assert count == 1
+        
+        records = history_manager.get_last_records(1)
+        
+        assert len(records) == 1
+        assert records[0]['equation'] == test_equation
+        assert records[0]['result'] == str(test_result)
 
     def test_get_last_records(
             self,
-            history_manager,
-            memory_db_connection,
-            mocker
+            history_manager
     ):
         """
         Verifica que get_last_records devuelve los registros correctos.
@@ -147,66 +103,30 @@ class TestHistoryManager:
 
         :param history_manager: Instancia de HistoryManager para pruebas
         :type history_manager: HistoryManager
-        :param memory_db_connection: Conexión a BD en memoria
-        :type memory_db_connection: sqlite3.Connection
-        :param mocker: Objeto mock de pytest para simular dependencias
-        :type mocker: pytest_mock.MockerFixture
 
         :note: Se enfoca en verificación manual de la base de datos ya que
                el decorador podría no estar retornando valores directamente.
         """
 
-        # Arrange
-        mocker.patch.object(
-            history_manager_module,
-            'db_connect',
-            memory_db_connection
-        )
-        history_manager.create_table()
-
         # Insertamos 10 registros para pruebas
-        test_entries = [
-            {"equation": f"{i}+{i}", "result": Decimal(f"{i+i}")}
-            for i in range(1, 11)
-        ]
-
-        for entry in test_entries:
-            history_manager.new_history(entry["equation"], entry["result"])
-
-        # Act y Assert
-        # En lugar de capturar el retorno, verificamos directamente a
-        # base de datos ya que el decorador podría no estar retornando el valor
+        for i in range(1, 11):
+            history_manager.new_history(f"{i}+{i}", Decimal(f"{i+i}"))
 
         # TEST: existen 10 registros.
-        cursor = memory_db_connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM history_results")
-        count = cursor.fetchone()[0]
-        assert count == 10
+        all_records = history_manager.get_last_records(10)
+        assert len(all_records) == 10
 
-        # TEST: get_last_records muestra información correcta (aunque no
-        # podamos verificar el retorno). Usar print() para verificar.
-        history_manager.get_last_records(5)
-
-        # TEST: Verificación manual de los últimos 5 registros.
-        cursor.execute(
-            "SELECT ID, EQUATION, \
-            RESULT FROM history_results \
-            ORDER BY ID DESC LIMIT 5"
-        )
-        last_five = cursor.fetchall()
+        # TEST: get_last_records muestra información correcta.
+        last_five = history_manager.get_last_records(5)
         assert len(last_five) == 5
 
         # TEST: el último registro es el esperado (10+10=20).
-        assert last_five[0][1] == "10+10"
-        assert last_five[0][2] == "20"
-
-        cursor.close()
+        assert last_five[0]['equation'] == "10+10"
+        assert last_five[0]['result'] == "20"
 
     def test_delete_history(
         self,
-        history_manager,
-        memory_db_connection,
-        mocker
+        history_manager
     ):
         """
         Verifica que delete_history elimina todos los registros correctamente.
@@ -221,54 +141,32 @@ class TestHistoryManager:
 
         :param history_manager: Instancia de HistoryManager para pruebas
         :type history_manager: HistoryManager
-        :param memory_db_connection: Conexión a BD en memoria
-        :type memory_db_connection: sqlite3.Connection
-        :param mocker: Objeto mock de pytest para simular dependencias
-        :type mocker: pytest_mock.MockerFixture
 
         :raises AssertionError: Si los registros no se eliminan correctamente
 
         :note: Incluye pruebas de robustez para garantizar que el método
                es seguro de ejecutar múltiples veces.
         """
-        # Arrange
-        mocker.patch.object(
-            history_manager_module,
-            'db_connect',
-            memory_db_connection
-        )
-        history_manager.create_table()
-
         # Insertamos algunos registros de prueba.
-        test_entries = [
-            {"equation": "1+1", "result": Decimal("2")},
-            {"equation": "3*4", "result": Decimal("12")},
-        ]
-
-        for entry in test_entries:
-            history_manager.new_history(entry["equation"], entry["result"])
+        history_manager.new_history("1+1", Decimal("2"))
+        history_manager.new_history("3*4", Decimal("12"))
 
         # TEST: registros se insertar correctamente.
-        cursor = memory_db_connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM history_results")
-        count_before = cursor.fetchone()[0]
-        assert count_before > 0
+        records_before = history_manager.get_last_records(10)
+        assert len(records_before) > 0
 
         # Act
         history_manager.delete_history()
 
         # Assert
-        cursor.execute("SELECT COUNT(*) FROM history_results")
-        count_after = cursor.fetchone()[0]
-        assert count_after == 0  # Verifica que no quedan registros
+        records_after = history_manager.get_last_records(10)
+        assert len(records_after) == 0  # Verifica que no quedan registros
 
         # TEST: también funciona cuando la tabla está vacía. No debería lanzar
         # errores
         history_manager.delete_history()
-        cursor.execute("SELECT COUNT(*) FROM history_results")
-        count_still_empty = cursor.fetchone()[0]
-        assert count_still_empty == 0
-        cursor.close()
+        records_still_empty = history_manager.get_last_records(10)
+        assert len(records_still_empty) == 0
 
     def test_singleton_pattern(self):
         """
@@ -287,6 +185,7 @@ class TestHistoryManager:
         :note: El patrón Singleton es crucial para evitar múltiples conexiones
                a la base de datos y garantizar consistencia en el historial.
         """
+        HistoryManager._instance = None # Resetea para la prueba
         instance1 = HistoryManager()
         instance2 = HistoryManager()
 

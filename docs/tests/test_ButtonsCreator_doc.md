@@ -1,86 +1,60 @@
-# Clase **MockDisplay**
+# Pruebas de `TestButtonsCreator`
 
-## Propósito y Responsabilidad
-
-La clase `MockDisplay` es una clase auxiliar utilizada en pruebas unitarias para 
-simular el comportamiento del widget `QLabel` de PyQt5 para permitir test
-unitarios sobre la clase `ButtonsCreator`. Su principal objetivo 
-es permitir verificar el flujo y la lógica del programa sin necesidad de una 
-interfaz gráfica real, haciendo posible el testeo automatizado de componentes 
-que interactúan con elementos visuales.
-
-### Características principales
-
-- Simulación de interfaz: Reemplaza a `QLabel` en entornos de prueba.
-- Facilidad de prueba: Permite verificar que se actualice correctamente el texto.
-- Aislamiento: Reduce dependencias en entornos gráficos complejos.
-- Simple y reutilizable: Puede utilizarse en múltiples tests donde se necesite 
-  simular etiquetas visuales.
+La clase **`TestButtonsCreator`** contiene las pruebas unitarias para la clase `ButtonsCreator`. Estas pruebas se centran en verificar que la lógica de la interfaz de usuario (los botones) funcione como se espera, utilizando mocks para simular los componentes de la interfaz gráfica de PyQt.
 
 ---
 
-## Diagrama UML
+## Funcionalidad de las Pruebas
 
-
-<figure markdown="span">
-  ![MockDisplay - UML](./tests_uml/uml_tests_ButtonsCreator.svg){ width="500" }
-  <figcaption>Clase MockDisplay</figcaption>
-</figure>
+- **Simulación de la Interfaz (Mocking)**: Se utiliza `pytest-mock` para crear "mocks" (simulacros) de los componentes de la interfaz gráfica como `QWidget` y `QLabel`. Esto permite probar la lógica de `ButtonsCreator` sin necesidad de crear una interfaz gráfica real, lo que hace que las pruebas sean más rápidas y fiables.
+- **Verificación de la Lógica de los Botones**: Se comprueba que al llamar a los métodos de `ButtonsCreator` (como `insert_value`, `insert_operator`, etc.), el estado de la calculadora (`CalculatorState`) se actualice correctamente y que los `QLabel` (las pantallas) muestren la información esperada.
+- **Pruebas de Casos Límite**: Se prueban escenarios como la inserción de múltiples puntos decimales, el cálculo con valores vacíos y la limpieza de la pantalla.
 
 ---
 
-## Métodos principales
+## Métodos de Prueba
 
-```python
-+ __init__() -> None
-+ setText(text: str) -> None
+### `test_insert_value()`
+Verifica que al insertar valores numéricos, el `display_value_1` se actualice correctamente.
+
+### `test_insert_operator()`
+Verifica que al insertar un operador, el `display_operator` se actualice correctamente.
+
+### `test_calculate_result()`
+Verifica que al llamar a `calculate_result`, se realice el cálculo correctamente, se actualice el `display_result` y se guarde la operación en el historial.
+
+### `test_clear_screen()`
+Verifica que al llamar a `clear_screen`, todos los `displays` se limpien y el estado de la calculadora se reinicie.
+
+### `test_delete_last_char()`
+Verifica que al llamar a `delete_last_char`, se elimine el último carácter del valor actual.
+
+### `test_insert_decimal_point()`
+Verifica que solo se pueda insertar un punto decimal por número.
+
+---
+
+## Diagrama UML de Pruebas
+
+```mermaid
+classDiagram
+    class TestButtonsCreator {
+        +setup_method()
+        +test_insert_value()
+        +test_insert_operator()
+        +test_calculate_result()
+        +test_clear_screen()
+        +test_delete_last_char()
+        +test_insert_decimal_point()
+    }
+
+    class ButtonsCreator {
+        +insert_value(value: str)
+        +insert_operator(operator: str)
+        +calculate_result(value: str)
+        +clear_screen(value: str)
+        +delete_last_char(value: str)
+    }
+
+    TestButtonsCreator ..> ButtonsCreator : tests
 ```
-
-### Descripción de métodos clave
-
-- `__init__()`  
-    Inicializa una nueva instancia de `MockDisplay`, con el atributo `text` vacío.
-    
-- `setText(text)`  
-    Emula el método `setText` de `QLabel`, guardando el valor recibido en el  
-    atributo `text` interno.
-    
----
-
-## Dependencias
-
-| Componente | Descripción                                            |
-| ---------- | ------------------------------------------------------ |
-| Python     | No requiere librerías externas.                        |
-| PyQt5      | Simula el comportamiento de `QLabel`, pero sin usarlo. |
-
----
-
-## Relaciones
-
-| Relación       | Descripción                                                    |
-| -------------- | -------------------------------------------------------------- |
-| ButtonsCreator | Se usa como reemplazo de los `QLabel` en pruebas unitarias.    |
-| pytest         | Framework que ejecuta los tests donde se emplea `MockDisplay`. |
-
----
-
-## Ejemplo de uso
-
-```python
-def test_insert_value():
-    display = MockDisplay()
-    display.setText("5")
-    assert display.text == "5"
-```
-
-### Explicación del ejemplo
-
-1. **Instanciación**  
-    Se crea un objeto `MockDisplay`.
-    
-2. **Simulación de interacción**  
-    Se usa el método `setText("5")` para simular un cambio de texto.
-    
-3. **Verificación**  
-    Se evalúa que el atributo `text` haya sido correctamente actualizado.

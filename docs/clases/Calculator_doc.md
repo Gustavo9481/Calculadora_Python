@@ -1,125 +1,63 @@
-# Clase **Calculator**
+# Clase `Calculator`
 
-## Propósito y Responsabilidad
+La clase **`Calculator`** proporciona métodos estáticos para realizar operaciones aritméticas básicas con alta precisión, utilizando el tipo `Decimal` para garantizar la exactitud en los cálculos.
 
-La clase `Calculator` tiene como propósito proporcionar operaciones aritméticas básicas con alta precisión, utilizando el tipo `Decimal` del módulo estándar `decimal`. Esta clase permite realizar sumas, restas, multiplicaciones, divisiones y cálculo de porcentajes de forma **determinista**, **precisa**, **thread-safe** y **stateless**.
+---
 
-### Características principales
+## Funcionalidad
 
-- **Precisión**: Utiliza `Decimal` con una precisión configurada de 28 dígitos, ideal para contextos financieros o científicos.
-    
-- **Cacheo**: Aplica `functools.lru_cache` para evitar cálculos repetitivos.
-    
-- **Thread-safe**: Al no usar estado interno y emplear funciones puras, es seguro para ejecución concurrente.
-    
-- **Stateless**: Todos los métodos son estáticos y no dependen del estado de una instancia.
-    
+- **Operaciones de Alta Precisión**: Realiza sumas, restas, multiplicaciones, divisiones y cálculos de porcentaje.
+- **Seguridad en Hilos (`Thread-Safe`)**: Todos los métodos son seguros para ser utilizados en entornos con múltiples hilos.
+- **Optimización con Caché**: Utiliza el decorador `lru_cache` para almacenar en caché los resultados de los cálculos, lo que mejora el rendimiento al evitar recalcular operaciones repetidas.
+- **Precisión Decimal**: La precisión de los cálculos está configurada a 28 dígitos para manejar números grandes y decimales con exactitud.
 
-### Patrón de Diseño aplicado
+---
 
-Se aplica el patrón **Estrategia estática sin estado (Stateless Utility Class)**:
+## Métodos Estáticos
 
-- Este patrón encapsula un conjunto de funciones relacionadas en una clase que no mantiene estado ni requiere instanciación.
-    
-- Permite agrupar lógica común (en este caso, operaciones aritméticas) de manera ordenada y reutilizable.
-    
+Todos los métodos de esta clase son estáticos, lo que significa que no es necesario crear una instancia de `Calculator` para utilizarlos.
 
-### Implementación del patrón
+### `add(value_1: Decimal, value_2: Decimal) -> Decimal`
+Suma dos valores decimales.
 
-```python
-class Calculator:
-    @staticmethod
-    @lru_cache(maxsize=1000)
-    def add(value_1: Decimal, value_2: Decimal) -> Decimal:
-        return value_1 + value_2
-    # ... resto de operaciones similares (resta, multiplicación, división, porcentaje)
-```
+### `subtract(value_1: Decimal, value_2: Decimal) -> Decimal`
+Resta dos valores decimales.
 
-#### Por qué este patrón y sus ventajas
+### `multiply(value_1: Decimal, value_2: Decimal) -> Decimal`
+Multiplica dos valores decimales.
 
-- **Claridad y organización**: Todas las funciones aritméticas están agrupadas en una clase.
-    
-- **Reutilización**: Puede ser usada por cualquier módulo sin necesidad de instanciación.
-    
-- **Bajo acoplamiento**: No depende de otras clases o estados internos.
-    
-- **Alto rendimiento**: Uso de `lru_cache` para evitar recálculos innecesarios.
-    
+### `divide(value_1: Decimal, value_2: Decimal) -> Decimal`
+Divide dos valores decimales. Lanza una excepción `ZeroDivisionError` si el divisor es cero.
+
+### `percent(value_1: Decimal, value_2: Decimal) -> Decimal`
+Calcula el porcentaje de un valor con respecto a otro.
 
 ---
 
 ## Diagrama UML
 
-<figure markdown="span">
-  ![AppCalculator - UML](./clases_uml/uml_calculator.svg){ width="500" }
-  <figcaption>Clase Calculator</figcaption>
-</figure>
+```mermaid
+classDiagram
+    class Calculator {
+        <<static>>
+        +add(value_1: Decimal, value_2: Decimal): Decimal
+        +subtract(value_1: Decimal, value_2: Decimal): Decimal
+        +multiply(value_1: Decimal, value_2: Decimal): Decimal
+        +divide(value_1: Decimal, value_2: Decimal): Decimal
+        +percent(value_1: Decimal, value_2: Decimal): Decimal
+    }
+```
 
 ---
 
-## Métodos principales
+## Ejemplo de Uso
 
-- `add(value_1: Decimal, value_2: Decimal) -> Decimal`
-    
-    - Suma dos valores decimales.
-        
-- `subtract(value_1: Decimal, value_2: Decimal) -> Decimal`
-    
-    - Resta dos valores decimales.
-        
-- `multiply(value_1: Decimal, value_2: Decimal) -> Decimal`
-    
-    - Multiplica dos valores decimales.
-        
-- `divide(value_1: Decimal, value_2: Decimal) -> Decimal`
-    
-    - Divide dos valores decimales. Lanza `ZeroDivisionError` si el divisor es cero.
-        
-- `percent(value_1: Decimal, value_2: Decimal) -> Decimal`
-    
-    - Calcula el porcentaje de `value_1` respecto a `value_2`.
-        
-
----
-## Dependencias
-
-|                             |                                                        |
-| --------------------------- | ------------------------------------------------------ |
-| Python                      | versión igual o mayor a python3.7                      |
-| decimal (módulo estándar)   | Para realizar operaciones con alta precisión numérica. |
-| functools (módulo estándar) | Se usa `lru_cache` para mejorar el rendimiento.        |
-
----
-## Relaciones
-
-- Esta clase puede ser utilizada por cualquier capa de la aplicación (negocio, servicios, presentación).
-    
-- Puede complementarse con objetos DTO como `HistoryTableDB` para registrar los resultados.
- 
----
-## Ejemplo de uso
+Debido a que los métodos son estáticos, se pueden llamar directamente desde la clase:
 
 ```python
 from decimal import Decimal
-from calculator import Calculator
+from core.calculator import Calculator
 
-if __name__ == "__main__":
-    a = Decimal("12.5")
-    b = Decimal("7.3")
-
-    print("Suma:", Calculator.add(a, b))
-    print("Resta:", Calculator.subtract(a, b))
-    print("Multiplicación:", Calculator.multiply(a, b))
-    print("División:", Calculator.divide(a, b))
-    print("Porcentaje:", Calculator.percent(a, b))
+resultado = Calculator.add(Decimal('10.5'), Decimal('5.5'))
+print(resultado)  # Salida: 16.0
 ```
-
-### Explicación del ejemplo
-
-1. **Importación de la clase**: Se importa `Calculator` y el tipo `Decimal`.
-    
-2. **Inicialización de datos**: Se crean dos valores decimales de prueba.
-    
-3. **Llamadas a métodos estáticos**: Se realizan todas las operaciones sin necesidad de crear una instancia de la clase.
-    
-4. **Salida legible**: Cada resultado se muestra por consola en un formato claro y directo.

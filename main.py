@@ -48,8 +48,8 @@ class AppCalculator:
         :returns: None
         :rtype: None
         """
-        self.interface.run()
         self.history_db.create_table()
+        self.interface.run()
 
 
 if __name__ == "__main__":

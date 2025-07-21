@@ -1,127 +1,68 @@
-# Clase **HistoryManager**
+# Clase `HistoryManager`
 
-# Propósito y Responsabilidad
-La clase HistoryManager gestiona el historial de operaciones matemáticas guardadas en una base de datos SQLite local. Esta clase centraliza la creación, lectura y eliminación de registros en la tabla history_results, manteniendo una sola instancia activa gracias al patrón Singleton.
+La clase **`HistoryManager`** gestiona todas las operaciones de la base de datos para el historial de la calculadora. Implementa el patrón de diseño **Singleton** para garantizar que solo exista una única instancia de esta clase, evitando así múltiples conexiones a la base de datos.
 
-### Características principales
-- Gestión de base de datos SQLite: Ejecuta operaciones CREATE, INSERT, SELECT y DELETE sobre la tabla de historial.
-- Uso de decorador: Emplea un decorador llamado @gestor_database que se encarga automáticamente de manejar el cursor y las conexiones.
-- Simplicidad de uso: La interfaz de uso expone métodos directos y claros para interactuar con la base de datos.
-- Encapsulamiento de lógica de persistencia: Aísla el acceso a datos para que otras capas (como la lógica de negocio o UI) no se preocupen de los detalles técnicos.
+---
 
-### Patrón de Diseño aplicado
-Se utiliza el patrón Singleton para asegurar una única instancia de HistoryManager durante la ejecución del programa.
+## Funcionalidad
 
-### Implementación del patrón
-```python
-class HistoryManager:
-    _instance = None
+- **Patrón Singleton**: Asegura una única instancia de `HistoryManager` para toda la aplicación.
+- **Gestión de la Base de Datos**: Maneja la creación de la tabla, la inserción de nuevos registros, la eliminación del historial y la consulta de los últimos registros.
+- **Decorador `gestor_database`**: Simplifica el manejo de la conexión y el cursor de la base de datos, abriendo y cerrando la conexión automáticamente y manejando posibles errores.
 
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-```
+---
 
-#### Por qué este patrón y sus ventajas
-- Evita múltiples conexiones innecesarias: Garantiza que todos los métodos accedan a la misma instancia de conexión.
-- Eficiencia: Reduce el costo de instanciar objetos repetidamente y simplifica el mantenimiento del estado.
-- Centralización del acceso: Toda interacción con el historial pasa por una única instancia coherente.
+## Atributos
+
+| Atributo | Tipo | Descripción |
+|---|---|---|
+| `_instance` | `HistoryManager` | Almacena la única instancia de la clase (Singleton). |
+| `_db_path` | `Path` | Ruta al archivo de la base de datos (`calculator_db.db`). |
+
+---
+
+## Métodos
+
+### `__new__()`
+Implementa el patrón Singleton. Si no existe una instancia de `HistoryManager`, crea una nueva; de lo contrario, devuelve la instancia existente.
+
+### `create_table()`
+Crea la tabla `history_results` en la base de datos si no existe. Esta tabla almacena la ecuación y el resultado de cada operación.
+
+### `new_history(history_equation: str, history_result: Decimal)`
+Agrega un nuevo registro al historial en la base de datos. Toma la ecuación y el resultado como parámetros.
+
+### `delete_history()`
+Elimina todos los registros de la tabla `history_results`.
+
+### `get_last_records(limit: int = 5) -> list`
+Obtiene los últimos registros del historial, ordenados de forma descendente. Por defecto, devuelve los últimos 5 registros.
 
 ---
 
 ## Diagrama UML
 
-
-<figure markdown="span">
-  ![HistoryManager - UML](./clases_uml/uml_history_manager.svg){ width="400" }
-  <figcaption>Clase HistoryManager</figcaption>
-</figure>
-
----
-## Métodos principales
-
-```python
-+ __new__(cls): HistoryManager
-+ create_table(): None
-+ new_history(history_equation: str, history_result: Decimal): None
-+ delete_history(): None
-+ get_last_records(limit: int = 5): list
+```mermaid
+classDiagram
+    class HistoryManager {
+        - _instance: HistoryManager
+        - _db_path: Path
+        + __new__()
+        + create_table()
+        + new_history(history_equation: str, history_result: Decimal)
+        + delete_history()
+        + get_last_records(limit: int): list
+    }
 ```
 
-#### Descripción de métodos
-
-- `__new__(cls)`  
-    Implementación del patrón Singleton. Devuelve siempre la misma instancia.
-    
-- `create_table()`  
-    Crea la tabla `history_results` si no existe. Define columnas para ID, ecuación y resultado.
-    
-- `new_history(equation, result)`  
-    Inserta una nueva operación matemática en la tabla. Recibe la ecuación en formato `str` y el resultado en `Decimal`.
-    
-- `delete_history()`  
-    Elimina todos los registros del historial.
-    
-- `get_last_records(limit=5)`  
-    Retorna los últimos `limit` registros insertados, ordenados por ID descendente.
-    
 ---
-## Dependencias
 
-|                |                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| Python         | versión igual o mayor a python3.7                                                        |
-| sqlite3        | módulo estáandar                                                                         |
-| decimal        | precisión numérica                                                                       |
-| typing         | `Callable, Any, List, Dict`                                                              |
-| HistoryTableDB | Clase auxiliar para validar y encapsular datos antes de insertarlos en la base de datos. |
-  
----
-## Relaciones
+## Decorador `gestor_database`
 
-|                                                     |                                                                                                                                     |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Decorador externo                                   | Utiliza `@gestor_database` para envolver métodos que acceden a la base de datos, inyectando automáticamente el cursor de conexión.  |
-| HistoryTableDB                                      | Se emplea para encapsular la ecuación y el resultado antes de insertarlos, actuando como objeto DTO.                                |
-| Sistema externo de presentación o lógica de negocio | Este será responsable de invocar los métodos de `HistoryManager` según las acciones del usuario (como guardar o mostrar historial). |
+Este decorador se encarga de la gestión de la conexión a la base de datos. Envuelve los métodos que interactúan con la base de datos y se encarga de:
 
----
-## Ejemplo de uso
-```python
-from decimal import Decimal
-from history_manager_db import HistoryManager
-
-if __name__ == "__main__":
-    manager = HistoryManager()
-
-    # Crear la tabla si no existe
-    manager.create_table()
-
-    # Guardar operación
-    manager.new_history("3 * (2 + 4)", Decimal(18))
-
-    # Obtener últimos 3 registros
-    ultimos = manager.get_last_records(limit=3)
-    print(ultimos)
-
-    # Borrar historial
-    manager.delete_history()
-```
-
-### Explicación del ejemplo
-
-1. **Instancia**:  
-    `HistoryManager` se instancia usando el patrón Singleton. Siempre se reutiliza la misma instancia.
-    
-2. **Creación de tabla**:  
-    Se asegura que la tabla `history_results` esté lista antes de insertar datos.
-    
-3. **Nuevo registro**:  
-    Se guarda la ecuación y el resultado como un nuevo registro usando `Decimal` para evitar imprecisiones.
-    
-4. **Consulta del historial**:  
-    Se recuperan los últimos 3 registros insertados para mostrarlos o procesarlos.
-    
-5. **Limpieza del historial**:  
-    Se eliminan todos los registros con un solo comando.
+1.  Abrir la conexión a la base de datos.
+2.  Crear un cursor.
+3.  Ejecutar la función decorada, pasándole el cursor.
+4.  Cerrar el cursor y la conexión.
+5.  Manejar cualquier `sqlite3.Error` que pueda ocurrir.

@@ -1,132 +1,64 @@
-# Clase **InterfaceCreator**
+# Clase `InterfaceCreator`
 
-## Propósito y Responsabilidad
+La clase **`InterfaceCreator`** es la responsable de construir y organizar la interfaz gráfica completa de la calculadora. Actúa como un **orquestador**, utilizando otras clases "creadoras" (`ScreensCreator` y `ButtonsCreator`) para generar los componentes de la interfaz y ensamblarlos en la ventana principal.
 
-La clase `InterfaceCreator` se encarga de construir la ventana principal de la
-calculadora y de organizar todos los componentes visuales usando PyQt5. Actúa
-como un *ensamblador visual*, aplicando el patrón Factory para integrar las
-pantallas y los botones generados por otras clases.
+---
 
-### Características principales
+## Funcionalidad
 
-- Creación de ventana principal: Configura el `QMainWindow`, tamaño, título y
-  estilo general.
+- **Construcción de la Interfaz**: Crea la ventana principal de la aplicación (`QMainWindow`) y configura sus propiedades básicas como el título, el tamaño y el color de fondo.
+- **Orquestación de Creadores**: Utiliza `ScreensCreator` para generar las pantallas de la calculadora y `ButtonsCreator` para generar los botones.
+- **Organización del Layout**: Organiza las pantallas y los botones en un `QVBoxLayout` para que se muestren de forma ordenada en la ventana.
+- **Ejecución de la Aplicación**: Proporciona el método `run()` que inicia el bucle de eventos de Qt y muestra la interfaz al usuario.
 
-- Integración modular: Llama a `ScreensCreator` para generar las pantallas y a
-  `ButtonsCreator` para organizar los botones.
+---
 
-- Gestión del layout: Une todas las partes en un único `QVBoxLayout` que se
-  asigna al widget central.
+## Atributos
 
-- Ejecución de la app: Expone un método `run()` que lanza el bucle principal de
-  eventos de Qt.
+| Atributo | Tipo | Descripción |
+|---|---|---|
+| `app` | `QApplication` | Instancia de la aplicación Qt. |
+| `main_window` | `QMainWindow` | Ventana principal de la aplicación. |
+| `display_value_1` | `QLabel` | Pantalla para el primer valor (obtenida de `ScreensCreator`). |
+| `display_value_2` | `QLabel` | Pantalla para el segundo valor (obtenida de `ScreensCreator`). |
+| `display_operator` | `QLabel` | Pantalla para el operador (obtenida de `ScreensCreator`). |
+| `display_result` | `QLabel` | Pantalla para el resultado (obtenida de `ScreensCreator`). |
 
-### Patrón de Diseño aplicado
+---
 
-`InterfaceCreator` aplica el patrón Factory Method de forma explícita, ya que
-orquesta la creación de componentes gráficos delegando dicha responsabilidad en
-clases especializadas (`ScreensCreator`, `ButtonsCreator`), facilitando la
-modularidad y reutilización.
+## Métodos
 
-### Implementación del patrón
-```python
-def _setup_window(self) -> None:
-    screens_creator = ScreensCreator(self.main_window)
-    (layout, val1, val2, op, res) = screens_creator.create_screens()
+### `_setup_window()`
+Este método privado se encarga de toda la lógica de configuración de la ventana. Crea el widget central, el layout principal, y luego llama a `ScreensCreator` y `ButtonsCreator` para que generen los componentes de la interfaz. Finalmente, añade estos componentes al layout principal.
 
-    buttons_creator = ButtonsCreator(
-        central_widget, val1, val2, op, res
-    )
-    buttons_layout = buttons_creator.create_buttons()
-```
-
-#### Por qué este patrón y sus ventajas
-
-- **Modularidad**: Permite modificar la lógica de pantallas o botones sin tocar  
-    esta clase.
-    
-- **Reutilización**: Se pueden reutilizar las clases creadoras para otras UIs o  
-    versiones.
-    
-- **Escalabilidad**: Es fácil extender la UI añadiendo más bloques funcionales  
-    o visuales.
-    
+### `run()`
+Este método público inicia la aplicación. Muestra la ventana principal y comienza el bucle de eventos de Qt, que se encarga de procesar las interacciones del usuario (como hacer clic en los botones).
 
 ---
 
 ## Diagrama UML
 
-<figure markdown="span">
-  ![InterfaceCreator - UML](./clases_uml/uml_interface_creator.svg){ width="300" }
-  <figcaption>Clase InterfaceCreator</figcaption>
-</figure>
+```mermaid
+classDiagram
+    class InterfaceCreator {
+        +app: QApplication
+        +main_window: QMainWindow
+        +display_value_1: QLabel
+        +display_value_2: QLabel
+        +display_operator: QLabel
+        +display_result: QLabel
+        - _setup_window()
+        + run()
+    }
 
+    class ScreensCreator {
+        +create_screens(): tuple
+    }
 
----
+    class ButtonsCreator {
+        +create_buttons(): QGridLayout
+    }
 
-## Métodos principales
-
-```python
-+ __init__() -> None
-+ run() -> None
-- _setup_window() -> None
+    InterfaceCreator o-- ScreensCreator : uses
+    InterfaceCreator o-- ButtonsCreator : uses
 ```
-
-### Descripción de métodos clave
-
-- `__init__()`  
-    Inicializa la instancia principal, configurando la app y llamando a  
-    `_setup_window()`.
-    
-- `run()`  
-    Lanza el bucle principal de la interfaz gráfica mostrando la ventana.
-    
-- `_setup_window()`  
-    Método interno que arma y conecta toda la estructura visual, integrando  
-    pantallas y botones.
-
----
-
-## Dependencias
-
-|                     |                                                                  |
-| ------------------- | ---------------------------------------------------------------- |
-| Python              | versión igual o mayor a Python 3.7                               |
-| PyQt5               | Widgets: `QApplication`, `QMainWindow`, `QWidget`, `QVBoxLayout` |
-| ui_screens_creators | Clase encargada de construir las pantallas de la calculadora     |
-| ui_buttons_creator  | Clase encargada de construir los botones de la interfaz          |
-
----
-
-## Relaciones
-
-|                                     |                                                                 |
-| ----------------------------------- | --------------------------------------------------------------- |
-| ScreensCreator                      | Clase responsable de construir los QLabel usados como pantallas |
-| ButtonsCreator                      | Clase que construye el conjunto de botones de la calculadora    |
-| QMainWindow / QWidget / QVBoxLayout | Estructura base del layout y presentación visual                |
-
----
-
-## Ejemplo de uso
-
-```python
-from ui_interface_creator import InterfaceCreator
-
-if __name__ == "__main__":
-    interface = InterfaceCreator()
-    interface.run()
-```
-
-### Explicación del ejemplo
-
-1. **Importación del módulo**  
-    Se importa la clase `InterfaceCreator` desde su módulo correspondiente.
-    
-2. **Instanciación**  
-    Se crea una instancia de la clase que inicializa la ventana y la estructura  
-    visual.
-    
-3. **Ejecución de la aplicación**  
-    Se invoca el método `run()` que muestra la interfaz y queda a la espera de  
-    eventos del usuario.

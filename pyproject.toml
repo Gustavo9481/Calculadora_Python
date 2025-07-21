@@ -5,9 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "calculator-app"
 version = "0.1.0"
-requires-python = ">=3.8"
+requires-python = ">=3.8.1"
 dependencies = [
-    "pydantic~=1.10"
+    "pydantic~=1.10",
+    "PyQt5~=5.15"
 ]
 
 # === NUEVA SECCIÓN: Dependencias opcionales ===

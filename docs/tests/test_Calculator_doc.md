@@ -1,107 +1,60 @@
-# Tests unitarios para **Calculator**
+# Pruebas de `TestCalculator`
 
-## Propósito y Responsabilidad
-
-El archivo `test_calculator.py` contiene pruebas unitarias para verificar el 
-funcionamiento correcto de los métodos de la clase `Calculator`. Estas pruebas 
-aseguran que las operaciones aritméticas se comportan como se espera en 
-diversos escenarios: positivos, negativos, decimales y casos borde como la 
-división por cero.
-
-### Características principales
-
-- **Cobertura**: Se cubren los métodos `add`, `subtract`, `multiply` y `divide`.
-- **Uso de Decimal**: Todas las pruebas usan `Decimal` para mantener la 
-  precisión.
-- **Uso de pytest**: Se utiliza `pytest` para manejar las aserciones y 
-  excepciones esperadas.
-- **Composición**: Cada grupo de pruebas se organiza en una clase independiente 
-  por método.
+La clase **`TestCalculator`** contiene las pruebas unitarias para la clase `Calculator`. El objetivo de estas pruebas es asegurar que todas las operaciones aritméticas (suma, resta, multiplicación, división y porcentaje) funcionen correctamente y manejen los casos límite de manera adecuada.
 
 ---
 
-## Organización del archivo
+## Funcionalidad de las Pruebas
 
-El archivo está estructurado en 4 bloques principales, cada uno testeando un 
-método de `Calculator`:
-
-- `TestCalculatorAdd`: pruebas del método `add()`.
-- `TestCalculatorSubtract`: pruebas del método `subtract()`.
-- `TestCalculatorMultiply`: pruebas del método `multiply()`.
-- `TestCalculatorDivide`: pruebas del método `divide()`.
+- **Pruebas Parametrizadas**: Se utiliza `pytest.mark.parametrize` para probar cada operación con un conjunto diverso de datos, incluyendo números positivos, negativos, decimales y cero. Esto permite cubrir múltiples escenarios con un solo método de prueba.
+- **Manejo de Errores**: Se verifica que la operación de división lance correctamente la excepción `ZeroDivisionError` cuando se intenta dividir por cero.
+- **Precisión Decimal**: Se asegura que los cálculos que involucran `Decimal` mantengan la precisión esperada.
 
 ---
 
-## Clases de prueba
+## Métodos de Prueba
 
-### TestCalculatorAdd
+### `test_add(value_1, value_2, expected)`
+Verifica que la suma de `value_1` y `value_2` sea igual a `expected`.
 
-Pruebas para `Calculator.add()` en los siguientes casos:
+### `test_subtract(value_1, value_2, expected)`
+Verifica que la resta de `value_2` de `value_1` sea igual a `expected`.
 
-- Suma de enteros positivos y negativos.
-- Suma de decimales positivos y negativos.
-- Casos con cero como uno de los operandos.
+### `test_multiply(value_1, value_2, expected)`
+Verifica que la multiplicación de `value_1` y `value_2` sea igual a `expected`.
 
-### TestCalculatorSubtract
+### `test_divide(value_1, value_2, expected)`
+Verifica que la división de `value_1` por `value_2` sea igual a `expected`.
 
-Pruebas para `Calculator.subtract()` con:
+### `test_divide_by_zero(value_1, value_2)`
+Verifica que al intentar dividir `value_1` por cero (`value_2`), se lance la excepción `ZeroDivisionError`.
 
-- Enteros y decimales (positivos y negativos).
-- Validación de resta con cero.
-
-### TestCalculatorMultiply
-
-Pruebas para `Calculator.multiply()` considerando:
-
-- Multiplicación con enteros y decimales.
-- Comprobación de signo.
-- Multiplicación por cero.
-
-### TestCalculatorDivide
-
-Pruebas para `Calculator.divide()` en:
-
-- División entre enteros y decimales.
-- Casos con signos opuestos.
-- División por cero (se espera `ZeroDivisionError`).
+### `test_percent(value_1, value_2, expected)`
+Verifica que el cálculo del porcentaje de `value_1` con respecto a `value_2` sea igual a `expected`.
 
 ---
 
-## Diagrama UML 
+## Diagrama UML de Pruebas
 
-<figure markdown="span">
-  ![TestCalculator - UML](./tests_uml/uml_tests_Calculator.svg){ width="600" }
-  <figcaption>TestCalculator</figcaption>
-</figure>
+```mermaid
+classDiagram
+    class TestCalculator {
+        +test_add(value_1, value_2, expected)
+        +test_subtract(value_1, value_2, expected)
+        +test_multiply(value_1, value_2, expected)
+        +test_divide(value_1, value_2, expected)
+        +test_divide_by_zero(value_1, value_2)
+        +test_percent(value_1, value_2, expected)
+    }
 
----
+    class Calculator {
+        <<static>>
+        +add(value_1, value_2)
+        +subtract(value_1, value_2)
+        +multiply(value_1, value_2)
+        +divide(value_1, value_2)
+        +percent(value_1, value_2)
+    }
 
-## Dependencias
-
-|Librería|Descripción|
-|---|---|
-|`decimal`|Para operaciones de alta precisión numérica.|
-|`pytest`|Framework de pruebas utilizado para validar funciones.|
-
----
-
-## Ejecución
-
-Para ejecutar las pruebas usa el siguiente comando:
-
-```bash
-pytest test_calculator.py
+    TestCalculator ..> Calculator : tests
 ```
-
-Esto validará todas las funciones definidas y confirmará que `Calculator` se  
-comporta correctamente.
-
----
-
-## Consideraciones finales
-
-- Se espera que las excepciones, como la división por cero, sean correctamente  
-    lanzadas y capturadas.
-    
-- Cada clase agrupa las pruebas de un único método para mantener claridad y  
-    organización.

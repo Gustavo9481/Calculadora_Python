@@ -1,120 +1,71 @@
-# Clase **AppCalculator**
+# Clase `AppCalculator`
 
-## Propósito y Responsabilidad
+La clase **`AppCalculator`** es el punto de entrada principal de la aplicación de la calculadora. Su función es inicializar y gestionar la aplicación, coordinando la interfaz gráfica y la base de datos del historial.
 
-La clase `AppCalculator` tiene como propósito iniciar y gestionar la ejecución de
-una aplicación de calculadora con interfaz gráfica basada en PyQt. Esta clase actúa
-como punto de entrada de alto nivel en la arquitectura del programa, manteniendo
-una única responsabilidad: inicializar y ejecutar los componentes visuales y de base
-de datos de la aplicación.
+---
 
-### Características principales
+## Funcionalidad
 
-- **Inicialización clara**: Gestiona la creación de la interfaz y la conexión a la
-  base de datos histórica.
+- **Inicialización de la Aplicación**: Crea la instancia de la interfaz gráfica (`InterfaceCreator`) y el gestor de la base de datos (`HistoryManager`).
+- **Gestión de la Base de Datos**: Se asegura de que la tabla del historial exista en la base de datos al iniciar la aplicación.
+- **Ejecución de la Interfaz**: Inicia el bucle de eventos de la aplicación Qt para mostrar la ventana principal y gestionar las interacciones del usuario.
 
-- **Responsabilidad única**: Se enfoca en el arranque de la aplicación, evitando
-  lógica de negocio en esta capa.
+---
 
-- **Modularidad**: Se apoya en otros módulos (`InterfaceCreator` y
-  `HistoryManager`) para delegar funcionalidades específicas.
+## Atributos
 
-### Patrón de Diseño aplicado
+| Atributo    | Tipo               | Descripción                                            |
+|-------------|--------------------|--------------------------------------------------------|
+| `interface` | `InterfaceCreator` | Instancia de la interfaz gráfica de la calculadora.    |
+| `history_db`| `HistoryManager`   | Instancia del gestor de la base de datos del historial.|
 
-Se aplica el patrón **Fachada (Facade Pattern)**:
+---
 
-- Este patrón proporciona una interfaz unificada y simplificada a un conjunto de
-  interfaces en un subsistema más complejo.
+## Métodos
 
-- En este caso, `AppCalculator` encapsula la inicialización de la UI y la base de
-  datos, simplificando el uso externo de esos módulos.
+### `main()`
 
-### Implementación del patrón
+Este método es el punto de entrada que inicia la ejecución de la aplicación.
 
-```python
-class AppCalculator:
-    interface = InterfaceCreator()
-    history_db = HistoryManager()
+- **Responsabilidad**:
+  1. Llama a `create_table()` en la instancia de `history_db` para asegurar que la tabla del historial esté lista.
+  2. Llama a `run()` en la instancia de `interface` para mostrar la ventana principal e iniciar el bucle de eventos de Qt.
 
-    def main(self) -> None:
-        self.interface.run()
-        self.history_db.create_table()
-```
-
-#### Por qué este patrón y sus ventajas
-
-- **Simplicidad para el usuario final**: El cliente solo necesita instanciar  
-    `AppCalculator` y llamar a `main()` para iniciar todo el sistema.
-    
-- **Separación de preocupaciones**: La lógica de la UI y la persistencia están  
-    claramente separadas y delegadas.
-    
-- **Escalabilidad**: Es fácil extender la aplicación sin modificar la clase central,  
-    simplemente modificando las dependencias.
-    
+- **Parámetros**: No recibe ningún parámetro.
+- **Retorno**: No retorna ningún valor (`None`).
 
 ---
 
 ## Diagrama UML
 
+```mermaid
+classDiagram
+    class AppCalculator {
+        +interface: InterfaceCreator
+        +history_db: HistoryManager
+        +main(): None
+    }
 
-<figure markdown="span">
-  ![AppCalculator - UML](./clases_uml/uml_app_calculator.svg){ width="300" }
-  <figcaption>Clase AppCalculator</figcaption>
-</figure>
+    class InterfaceCreator {
+        +run(): None
+    }
 
+    class HistoryManager {
+        +create_table(): None
+    }
 
-## Métodos principales
-
-- `main() -> None`
-    
-    - Inicia la ejecución de la aplicación, lanzando la interfaz gráfica y  
-        asegurando que la base de datos esté inicializada.
-        
-
----
-
-## Dependencias
-
-|                  |                                                  |
-| ---------------- | ------------------------------------------------ |
-| Python           | versión igual o mayor a python3.7                |
-| PyQt             | Para la construcción y ejecución de la UI.       |
-| InterfaceCreator | Módulo encargado de generar la interfaz gráfica. |
-| HistoryManager   | Módulo que gestiona la base de datos histórica.  |
+    AppCalculator --> InterfaceCreator : uses
+    AppCalculator --> HistoryManager : uses
+```
 
 ---
 
-## Relaciones
+## Ejemplo de Uso
 
-- Esta clase orquesta los módulos `InterfaceCreator` y `HistoryManager`.
-    
-- Es utilizada como punto de entrada en el script principal de la aplicación:
-    
-    ```python
-    if __name__ == "__main__":     
-	    app = AppCalculator()     
-	    app.main()
-	```
-
----
-
-## Ejemplo de uso
+Para iniciar la aplicación, se crea una instancia de `AppCalculator` y se llama a su método `main()`:
 
 ```python
-from main import AppCalculator  
-
-if __name__ == "__main__":     
-	app = AppCalculator()     
-	app.main()
+if __name__ == "__main__":
+    app = AppCalculator()
+    app.main()
 ```
-### Explicación del ejemplo
-
-1. **Importación de la clase**: Se importa la clase principal desde el módulo `main`.
-    
-2. **Instanciación de la aplicación**: Se crea un objeto de tipo `AppCalculator`.
-    
-3. **Llamada al método `main()`**: Se ejecuta la aplicación, lanzando la UI y la  
-    inicialización de la base de datos.
-    
-4. **Composición simple**: No requiere parámetros, todo está gestionado internamente.

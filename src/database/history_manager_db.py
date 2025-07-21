@@ -14,10 +14,7 @@ import sqlite3
 from pathlib import Path
 from decimal import Decimal
 from typing import Callable, Any
-from database.history_db import HistoryTableDB
-
-db_path = Path(__file__).parent.parent / "database" / "calculator_db.db"
-db_connect = sqlite3.connect(db_path)
+from .history_db import HistoryTableDB
 
 
 # ------------------------------------------------------------- gestor_database
@@ -40,16 +37,17 @@ def gestor_database(func: Callable[..., Any]) -> Callable[..., Any]:
     :raises sqlite3.Error: Si ocurre un error al acceder a la base de datos.
     """
 
-    def db_decorator(*args: Any, **kwargs: Any) -> Any:
+    def db_decorator(self, *args: Any, **kwargs: Any) -> Any:
         try:
-            with db_connect:
+            with sqlite3.connect(self.db_path) as db_connect:
                 cursor = db_connect.cursor()
                 try:
-                    func(*args, cursor=cursor, **kwargs)
+                    return func(self, *args, cursor=cursor, **kwargs)
                 finally:
                     cursor.close()
         except sqlite3.Error:
             print("Ha ocurrido un error al acceder a la base de datos")
+            return None
 
     return db_decorator
 
@@ -63,6 +61,7 @@ class HistoryManager:
     """
 
     _instance = None
+    _db_path = None
 
     def __new__(cls):
         """
@@ -73,6 +72,9 @@ class HistoryManager:
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)
+            # Obtener la ruta del directorio del proyecto
+            project_dir = Path(__file__).parent.parent.parent
+            cls._instance.db_path = project_dir / "calculator_db.db"
         return cls._instance
 
     @gestor_database
