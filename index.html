@@ -1,0 +1,1652 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/">
+      
+      
+      
+        <link rel="next" href="clases/AppCalculator_doc/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Calculadora Python</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrainsMono+Nerd+Font:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrainsMono Nerd Font"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proyecto-calculadora-python" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Calculadora Python" class="md-header__button md-logo" aria-label="Calculadora Python" data-md-component="logo">
+      
+  <img src="calculator.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Calculadora Python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Gustavo9481/Calculadora_Python" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="clases/AppCalculator_doc/" class="md-tabs__link">
+          
+  
+  
+  Clases
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="tests/test_Calculator_doc/" class="md-tabs__link">
+          
+  
+  
+  Tests
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="license/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Info
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Calculadora Python" class="md-nav__button md-logo" aria-label="Calculadora Python" data-md-component="logo">
+      
+  <img src="calculator.svg" alt="logo">
+
+    </a>
+    Calculadora Python
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Gustavo9481/Calculadora_Python" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción General
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capturas-de-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capturas de Pantalla
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capturas de Pantalla">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interfaz-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interfaz Principal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inicio Rápido
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-de-la-arquitectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción de la Arquitectura
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-tecnologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack Tecnológico
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerrequisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerrequisitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones Básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del Proyecto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roadmap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-actual-106" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versión Actual (1.0.6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximas-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Próximas Versiones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-conocidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problemas Conocidos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribución
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contribución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proceso-de-contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proceso de Contribución
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-contribuciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Contribuciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guias-de-contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guías de Contribución
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-del-entorno-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del Entorno de Desarrollo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licencia
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Licencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-la-licencia-mit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen de la Licencia MIT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descargas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descargas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agradecimientos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agradecimientos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Clases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Clases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/AppCalculator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AppCalculator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/Calculator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/HistoryTableDB_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HistoryTableDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/HistoryManager_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HistoryManager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/ButtonsCreator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ButtonsCreator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/ScreensCreator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ScreensCreator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clases/InterfaceCreator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InterfaceCreator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tests
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tests
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tests/test_Calculator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TestCalculator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tests/test_ButtonsCreator_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MockDisplay
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tests/test_HistoryManager_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TestHistoryManager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Info
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción General
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capturas-de-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capturas de Pantalla
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capturas de Pantalla">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interfaz-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interfaz Principal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inicio Rápido
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-de-la-arquitectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción de la Arquitectura
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-tecnologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack Tecnológico
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerrequisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerrequisitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones Básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del Proyecto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roadmap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-actual-106" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versión Actual (1.0.6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximas-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Próximas Versiones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-conocidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problemas Conocidos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribución
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contribución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proceso-de-contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proceso de Contribución
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-contribuciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Contribuciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guias-de-contribucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guías de Contribución
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-del-entorno-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del Entorno de Desarrollo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licencia
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Licencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-la-licencia-mit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen de la Licencia MIT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descargas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descargas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agradecimientos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agradecimientos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="proyecto-calculadora-python">Proyecto Calculadora Python</h1>
+<p align="center">
+  <img src="calculator.svg" alt="Ícono de Calculadora" width="150"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status">
+</p>
+
+<h2 id="descripcion-general">Descripción General</h2>
+<p><strong>Proyecto Calculadora Python</strong> es una aplicación de calculadora de escritorio construida con Python y el framework PyQt5 para su interfaz gráfica de usuario. Ofrece operaciones aritméticas estándar con alta precisión y mantiene un historial de cálculos. El proyecto enfatiza una arquitectura limpia y modular, haciéndola fácil de entender y mantener.</p>
+<h2 id="capturas-de-pantalla">Capturas de Pantalla</h2>
+<h3 id="interfaz-principal">Interfaz Principal</h3>
+<p align="center">
+  <img src="CalculadoraPython.png" alt="Interfaz Calculadora" width="300"/>
+</p>
+<p><em>Vista principal de la calculadora con botones numéricos y operaciones básicas</em></p>
+<h2 id="caracteristicas">Características</h2>
+<ul>
+<li><strong>Interfaz Gráfica de Usuario (GUI):</strong> Interfaz intuitiva y responsiva impulsada por PyQt5.</li>
+<li><strong>Operaciones Aritméticas Estándar:</strong><ul>
+<li>Suma (+)</li>
+<li>Resta (-)</li>
+<li>Multiplicación (×)</li>
+<li>División (÷)</li>
+<li>Porcentaje (%)</li>
+</ul>
+</li>
+<li><strong>Cálculos de Alta Precisión:</strong> Utiliza el módulo <code>decimal</code> de Python para asegurar precisión, especialmente importante para cálculos financieros o científicos.</li>
+<li><strong>Historial Persistente de Cálculos:</strong> Guarda automáticamente el historial de cálculos en una base de datos SQLite local, permitiendo a los usuarios revisar operaciones pasadas.</li>
+<li><strong>Arquitectura Modular:</strong> Separación bien definida de responsabilidades entre la interfaz de usuario, la lógica de cálculo y las capas de persistencia de datos.</li>
+</ul>
+<h2 id="inicio-rapido">Inicio Rápido</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Clonar el repositorio</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Gustavo9481/Calculadora_Python.git
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>Calculadora_Python
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Instalar uv (si no lo tienes)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.cargo/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Crear entorno virtual e instalar dependencias</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>uv<span class="w"> </span>venv
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w"> </span><span class="c1"># En Windows: .venv\Scripts\activate</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># Ejecutar la aplicación</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>python<span class="w"> </span>main.py
+</code></pre></div>
+<h2 id="descripcion-de-la-arquitectura">Descripción de la Arquitectura</h2>
+<p>La aplicación está diseñada con un enfoque modular, con componentes clave que incluyen:</p>
+<ul>
+<li><strong><code>AppCalculator</code></strong>: El orquestador principal de la aplicación. Inicializa la UI y la conexión a la base de datos, actuando como una Fachada para simplificar el proceso de inicio.</li>
+<li><strong>Componentes de UI (<code>InterfaceCreator</code>, <code>ButtonsCreator</code>, <code>ScreensCreator</code>)</strong>: Estas clases son responsables de construir y manejar los diversos elementos de la interfaz gráfica basada en PyQt5.</li>
+<li><strong><code>Calculator</code></strong>: Una clase utilitaria sin estado que proporciona métodos estáticos para todas las operaciones aritméticas. Utiliza <code>Decimal</code> para precisión y <code>lru_cache</code> para optimización de rendimiento.</li>
+<li><strong><code>HistoryManager</code></strong>: Maneja todas las interacciones con la base de datos SQLite para almacenar y recuperar el historial de cálculos. Está implementado como un Singleton para asegurar una sola conexión a la base de datos.</li>
+<li><strong><code>HistoryTableDB</code></strong>: Un Objeto de Transferencia de Datos (DTO) utilizado para manejar registros del historial.</li>
+</ul>
+<p>Se emplean varios patrones de diseño para mejorar la estructura y mantenibilidad del código:
+*   <strong>Patrón Fachada</strong>: Utilizado por <code>AppCalculator</code> para proporcionar una interfaz simplificada a los subsistemas complejos de inicialización de UI y base de datos.
+*   <strong>Patrón Singleton</strong>: Asegura que <code>HistoryManager</code> tenga solo una instancia, gestionando el acceso a la base de datos de forma centralizada.
+*   <strong>Clase Utilitaria Sin Estado</strong>: La clase <code>Calculator</code> agrupa funciones aritméticas relacionadas sin mantener ningún estado interno.</p>
+<h2 id="stack-tecnologico">Stack Tecnológico</h2>
+<ul>
+<li><strong>Lenguaje de Programación:</strong> Python (versión 3.8 o superior)</li>
+<li><strong>Framework GUI:</strong> PyQt5</li>
+<li><strong>Gestor de Dependencias:</strong> uv</li>
+<li><strong>Base de Datos:</strong> SQLite (a través del módulo integrado <code>sqlite3</code> de Python)</li>
+<li><strong>Aritmética de Precisión:</strong> Módulo <code>decimal</code> de Python</li>
+<li><strong>Caché:</strong> <code>functools.lru_cache</code> para optimizar cálculos</li>
+<li><strong>Pydantic</strong>: Para la validación y gestión de datos estructurados.</li>
+</ul>
+<h2 id="prerrequisitos">Prerrequisitos</h2>
+<p>Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:</p>
+<ul>
+<li>Python 3.8 o más reciente</li>
+<li>uv (gestor de paquetes y entorno virtual)</li>
+</ul>
+<h2 id="instalacion">Instalación</h2>
+<ol>
+<li>
+<p><strong>Clonar el repositorio (si aplica):</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Gustavo9481/Calculadora_Python.git
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>Calculadora_Python
+</code></pre></div>
+    Si tienes los archivos localmente, navega al directorio raíz del proyecto.</p>
+</li>
+<li>
+<p><strong>Instalar uv (si no lo tienes):</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Asegúrate de que uv esté en tu PATH. Por ejemplo, para bash/zsh:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Crear entorno virtual e instalar dependencias:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>venv
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w"> </span><span class="c1"># En Windows: .venv\Scripts\activate</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</code></pre></div>
+</li>
+</ol>
+<h2 id="uso">Uso</h2>
+<p>Para ejecutar la aplicación calculadora, ejecuta el script principal desde el directorio raíz del proyecto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>main.py
+</code></pre></div>
+<h3 id="operaciones-basicas">Operaciones Básicas</h3>
+<ul>
+<li><strong>Números:</strong> Haz clic en los botones numéricos para ingresar números</li>
+<li><strong>Operaciones:</strong> Usa +, -, ×, ÷ para operaciones básicas</li>
+<li><strong>Porcentaje:</strong> Usa el botón % para cálculos de porcentaje</li>
+<li><strong>Historial:</strong> Accede al historial desde el menú Ver &gt; Historial</li>
+</ul>
+<h2 id="estructura-del-proyecto">Estructura del Proyecto</h2>
+<p align="center">
+  <img src="tree.svg" alt="Estructura del Proyecto" width="600"/>
+</p>
+
+<h2 id="documentacion">Documentación</h2>
+<p>Este proyecto utiliza MkDocs para generar documentación. Puedes encontrar información detallada sobre clases, métodos y arquitectura en el directorio <code>docs</code>.</p>
+<p>Para servir la documentación localmente:</p>
+<ol>
+<li><strong>Instalar MkDocs y el tema Material (si no se ha hecho ya, usando uv):</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>mkdocs<span class="w"> </span>mkdocs-material
+</code></pre></div></li>
+<li><strong>Servir la documentación:</strong>
+    Desde el directorio raíz del proyecto, ejecuta:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdocs<span class="w"> </span>serve
+</code></pre></div>
+    Esto iniciará un servidor local, y podrás ver la documentación en tu navegador web (usualmente en <code>http://127.0.0.1:8000</code>).</li>
+</ol>
+<p>Para construir el sitio de documentación estática:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mkdocs<span class="w"> </span>build
+</code></pre></div></p>
+<h2 id="roadmap">Roadmap</h2>
+<h3 id="version-actual-106">Versión Actual (1.0.6)</h3>
+<ul>
+<li>[x] Operaciones aritméticas básicas (+, -, ×, ÷)</li>
+<li>[x] Cálculos de porcentaje</li>
+<li>[x] Historial persistente de cálculos</li>
+<li>[x] Interfaz gráfica con PyQt5</li>
+<li>[x] Arquitectura modular</li>
+<li>[x] Binarios precompilados para Linux y Windows (vía GitHub Actions)</li>
+</ul>
+<h3 id="proximas-versiones">Próximas Versiones</h3>
+<ul>
+<li>[ ] <strong>v1.1.0</strong> - Calculadora Python</li>
+<li>[ ] Temas personalizables (claro/oscuro)</li>
+<li>[ ] Interfaz para historial de operaciones</li>
+</ul>
+<h2 id="problemas-conocidos">Problemas Conocidos</h2>
+<ul>
+<li><strong>Windows 7</strong>: Puede requerir instalación manual de Visual C++ Redistributable</li>
+<li><strong>División por cero</strong>: Muestra mensaje de error estándar, considerar implementar manejo más elegante</li>
+<li><strong>Números muy grandes</strong>: El rendimiento puede verse afectado con números extremadamente grandes (&gt;1000 dígitos)</li>
+<li><strong>PyQt6</strong>: Algunas importaciones pueden necesitar ajustes menores al migrar desde PyQt5</li>
+</ul>
+<h2 id="contribucion">Contribución</h2>
+<p>¡Las contribuciones son bienvenidas! Aquí te explicamos cómo puedes ayudar:</p>
+<h3 id="proceso-de-contribucion">Proceso de Contribución</h3>
+<ol>
+<li><strong>Fork</strong> el proyecto</li>
+<li>Crea una <strong>rama</strong> para tu feature (<code>git checkout -b feature/CaracteristicaIncreible</code>)</li>
+<li><strong>Commit</strong> tus cambios (<code>git commit -m 'Agregar CaracteristicaIncreible'</code>)</li>
+<li><strong>Push</strong> a la rama (<code>git push origin feature/CaracteristicaIncreible</code>)</li>
+<li>Abre un <strong>Pull Request</strong></li>
+</ol>
+<h3 id="tipos-de-contribuciones">Tipos de Contribuciones</h3>
+<ul>
+<li>🐛 <strong>Reportar bugs</strong> - Crea un issue describiendo el problema</li>
+<li>💡 <strong>Sugerir features</strong> - Propón nuevas características</li>
+<li>📝 <strong>Mejorar documentación</strong> - Ayuda a hacer la documentación más clara</li>
+<li>🔧 <strong>Escribir código</strong> - Implementa nuevas funcionalidades o arregla bugs</li>
+<li>🧪 <strong>Escribir tests</strong> - Mejora la cobertura de pruebas</li>
+</ul>
+<h3 id="guias-de-contribucion">Guías de Contribución</h3>
+<ul>
+<li>Sigue las convenciones de código Python (PEP 8)</li>
+<li>Escribe tests para nuevas funcionalidades</li>
+<li>Actualiza la documentación cuando sea necesario</li>
+<li>Usa mensajes de commit descriptivos</li>
+</ul>
+<h3 id="configuracion-del-entorno-de-desarrollo">Configuración del Entorno de Desarrollo</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Clonar tu fork</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Gustavo9481/Calculadora_Python.git<span class="w"> </span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">cd</span><span class="w"> </span>Calculadora_Python
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># Crear entorno virtual con uv</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>uv<span class="w"> </span>venv
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">  </span><span class="c1"># En Windows: .venv\Scripts\activate</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Instalar dependencias de desarrollo (incluye pytest, flake8, pylint, mkdocs)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># Ejecutar tests</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/
+</code></pre></div>
+<h2 id="licencia">Licencia</h2>
+<p>Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo <a href="license/">LICENSE</a> para más detalles.</p>
+<h3 id="resumen-de-la-licencia-mit">Resumen de la Licencia MIT</h3>
+<ul>
+<li>✅ Uso comercial permitido</li>
+<li>✅ Modificación permitida</li>
+<li>✅ Distribución permitida</li>
+<li>✅ Uso privado permitido</li>
+<li>❌ Sin garantía</li>
+<li>❌ El autor no es responsable por daños</li>
+</ul>
+<h2 id="autores">Autores</h2>
+<ul>
+<li><strong>[GUScode | Gustavo Colmenares]</strong> - <em>Desarrollo inicial y mantenimiento</em> - <a href="https://github.com/Gustavo9481">Gustavo9481</a></li>
+</ul>
+<h2 id="descargas">Descargas</h2>
+<p>Puedes descargar las versiones precompiladas de la calculadora para tu sistema operativo desde la página de <a href="https://github.com/Gustavo9481/Calculadora_Python/releases">GitHub Releases</a>.</p>
+<ul>
+<li><strong>Linux:</strong> <code>calculadora-linux.tar.gz</code></li>
+<li><strong>Windows:</strong> <code>calculadora-windows.zip</code></li>
+</ul>
+<h2 id="agradecimientos">Agradecimientos</h2>
+<ul>
+<li>Inspirado por la calculadora estándar de Android.</li>
+<li>Iconos proporcionados por <a href="https://phosphoricons.com">Phosphoricons</a></li>
+<li>Documentación mejorada gracias a <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a></li>
+<li>Comunidad de Python por las excelentes librerías utilizadas</li>
+</ul>
+<hr />
+<p align="center">
+  <strong>¿Te gusta el proyecto? ¡Dale una ⭐ en GitHub!</strong>
+</p>
+
+<p align="center">
+  Hecho con ❤️ por la comunidad de desarrolladores Python
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
