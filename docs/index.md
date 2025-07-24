@@ -1,7 +1,7 @@
 # Proyecto Calculadora Python
 
 <p align="center">
-  <img src="docs/calculator.svg" alt="Ícono de Calculadora" width="150"/>
+  <img src="calculator.svg" alt="Ícono de Calculadora" width="150"/>
 </p>
 
 
@@ -20,14 +20,14 @@
 
 ### Interfaz Principal
 <p align="center">
-  <img src="docs/CalculadoraPython.png" alt="Interfaz Calculadora" width="300"/>
+  <img src="CalculadoraPython.png" alt="Interfaz Calculadora" width="300"/>
 </p>
 *Vista principal de la calculadora con botones numéricos y operaciones básicas*
 
 
 ## Características
 
-*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por CustomTkinter.
+*   **Interfaz Gráfica de Usuario (GUI):** Interfaz intuitiva y responsiva impulsada por PyQt5.
 *   **Operaciones Aritméticas Estándar:**
     *   Suma (+)
     * Resta (-)
@@ -42,8 +42,8 @@
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
-cd proyecto-calculadora-python
+git clone https://github.com/Gustavo9481/Calculadora_Python.git
+cd Calculadora_Python
 
 # Instalar uv (si no lo tienes)
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -81,6 +81,7 @@ Se emplean varios patrones de diseño para mejorar la estructura y mantenibilida
 *   **Base de Datos:** SQLite (a través del módulo integrado `sqlite3` de Python)
 *   **Aritmética de Precisión:** Módulo `decimal` de Python
 *   **Caché:** `functools.lru_cache` para optimizar cálculos
+*   **Pydantic**: Para la validación y gestión de datos estructurados.
 
 ## Prerrequisitos
 
@@ -93,8 +94,8 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
 
 1.  **Clonar el repositorio (si aplica):**
     ```bash
-    git clone <url-del-repositorio>
-    cd <directorio-del-repositorio>
+    git clone https://github.com/Gustavo9481/Calculadora_Python.git
+    cd Calculadora_Python
     ```
     Si tienes los archivos localmente, navega al directorio raíz del proyecto.
 
@@ -106,10 +107,11 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
     ```
 
 3.  **Crear entorno virtual e instalar dependencias:**
+
     ```bash
     uv venv
     source .venv/bin/activate # En Windows: .venv\Scripts\activate
-uv pip install -e .
+    uv pip install -e .
     ```
 
 ## Uso
@@ -119,7 +121,7 @@ Para ejecutar la aplicación calculadora, ejecuta el script principal desde el d
 ```bash
 python main.py
 ```
-*(Asumiendo que tu script principal de la aplicación es `main.py`. Por favor ajusta si tiene un nombre diferente, ej., `app.py`)*
+
 
 ### Operaciones Básicas
 - **Números:** Haz clic en los botones numéricos para ingresar números
@@ -128,24 +130,10 @@ python main.py
 - **Historial:** Accede al historial desde el menú Ver > Historial
 
 ## Estructura del Proyecto
+<p align="center">
+  <img src="tree.svg" alt="Estructura del Proyecto" width="600"/>
+</p>
 
-```
-.
-├── main.py                 # Script principal de la aplicación
-├── pyproject.toml          # Configuración del proyecto y dependencias (PEP 621)
-├── src/                    # Directorio del código fuente
-│   ├── core/               # Lógica de negocio y cálculo
-│   ├── database/           # Gestión de base de datos
-│   └── ui/                 # Componentes de interfaz de usuario
-├── docs/                   # Documentación del proyecto
-│   ├── index.md
-│   └── calculator.svg      # Ícono del proyecto
-├── tests/                  # Pruebas unitarias
-├── .github/                # Configuraciones de GitHub (ej. Workflows de Actions)
-├── .gitignore              # Archivos y directorios ignorados por Git
-├── LICENSE                 # Archivo de licencia
-└── README.md               # Este archivo
-```
 
 ## Documentación
 
@@ -219,8 +207,8 @@ mkdocs build
 ### Configuración del Entorno de Desarrollo
 ```bash
 # Clonar tu fork
-git clone https://github.com/tu-usuario/proyecto-calculadora-python.git
-cd proyecto-calculadora-python
+git clone https://github.com/Gustavo9481/Calculadora_Python.git 
+cd Calculadora_Python
 
 # Crear entorno virtual con uv
 uv venv
@@ -236,7 +224,7 @@ python -m pytest tests/
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](license.md) para más detalles.
 
 ### Resumen de la Licencia MIT
 - ✅ Uso comercial permitido

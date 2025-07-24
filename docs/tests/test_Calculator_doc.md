@@ -36,25 +36,7 @@ Verifica que el cálculo del porcentaje de `value_1` con respecto a `value_2` se
 
 ## Diagrama UML de Pruebas
 
-```mermaid
-classDiagram
-    class TestCalculator {
-        +test_add(value_1, value_2, expected)
-        +test_subtract(value_1, value_2, expected)
-        +test_multiply(value_1, value_2, expected)
-        +test_divide(value_1, value_2, expected)
-        +test_divide_by_zero(value_1, value_2)
-        +test_percent(value_1, value_2, expected)
-    }
-
-    class Calculator {
-        <<static>>
-        +add(value_1, value_2)
-        +subtract(value_1, value_2)
-        +multiply(value_1, value_2)
-        +divide(value_1, value_2)
-        +percent(value_1, value_2)
-    }
-
-    TestCalculator ..> Calculator : tests
-```
+<p align="center">
+    <img src="../tests_uml/uml_tests_Calculator.svg" alt="Diagrama UML
+        TestCalculator" width="550"/>
+</p>

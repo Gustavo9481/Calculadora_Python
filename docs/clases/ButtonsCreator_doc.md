@@ -52,33 +52,7 @@ Elimina el último carácter de la entrada actual.
 
 ## Diagrama UML
 
-```mermaid
-classDiagram
-    class ButtonsCreator {
-        +central_widget: QWidget
-        +display_value_1: QLabel
-        +display_value_2: QLabel
-        +display_operator: QLabel
-        +display_result: QLabel
-        +state: CalculatorState
-        +buttons: Dict
-        +history_manager: HistoryManager
-        +create_buttons(): QGridLayout
-        +insert_value(value: str)
-        +insert_operator(operator: str)
-        +calculate_result(value: str)
-        +clear_screen(value: str)
-        +delete_last_char(value: str)
-    }
-
-    class CalculatorState {
-        +value_1: str
-        +value_2: str
-        +current_operator: str
-        +result: str
-    }
-
-    ButtonsCreator *-- CalculatorState : manages
-    ButtonsCreator --> HistoryManager : uses
-    ButtonsCreator --> Calculator : uses
-```
+<p align="center">
+    <img src="../clases_uml/uml_buttons_creator.svg" alt="Diagrama UML
+        ButtonsCreator" width="400"/>
+</p>

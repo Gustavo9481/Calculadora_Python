@@ -42,18 +42,10 @@ Obtiene los últimos registros del historial, ordenados de forma descendente. Po
 
 ## Diagrama UML
 
-```mermaid
-classDiagram
-    class HistoryManager {
-        - _instance: HistoryManager
-        - _db_path: Path
-        + __new__()
-        + create_table()
-        + new_history(history_equation: str, history_result: Decimal)
-        + delete_history()
-        + get_last_records(limit: int): list
-    }
-```
+<p align="center">
+    <img src="../clases_uml/uml_history_manager.svg" alt="Diagrama UML
+        HistoryManager" width="400"/>
+</p>
 
 ---
 

@@ -19,13 +19,15 @@ class AppCalculator:
     Clase principal que inicia y gestiona la aplicación de la calculadora.
 
     Esta clase actúa como punto de entrada principal de la aplicación,
-    inicializando la interfaz gráfica y gestionando su ejecución. Implementa un
-    patrón de diseño simple con una única responsabilidad: iniciar la
-    aplicación.
+    inicializando interfaz gráfica y base de datos, gestionando su ejecución.
+    Implementa un patrón de diseño simple con una única responsabilidad:
+    iniciar la aplicación.
 
     :Attributes:
         interface (InterfaceCreator): Instancia de la interfaz gráfica de la
             calculadora.
+        history_db (HistoryManager): Instancia del gestor de la base de datos 
+            del historial.
 
     :Example:
         Para iniciar la aplicación:
@@ -43,7 +45,7 @@ class AppCalculator:
         Este método es el punto de entrada principal que inicia la interfaz
         gráfica de la calculadora. No recibe parámetros y no retorna ningún
         valor, su única responsabilidad es iniciar la ejecución de la interfaz
-        gráfica.
+        gráfica y base de datos.
 
         :returns: None
         :rtype: None

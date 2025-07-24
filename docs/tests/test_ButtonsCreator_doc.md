@@ -36,25 +36,7 @@ Verifica que solo se pueda insertar un punto decimal por número.
 
 ## Diagrama UML de Pruebas
 
-```mermaid
-classDiagram
-    class TestButtonsCreator {
-        +setup_method()
-        +test_insert_value()
-        +test_insert_operator()
-        +test_calculate_result()
-        +test_clear_screen()
-        +test_delete_last_char()
-        +test_insert_decimal_point()
-    }
-
-    class ButtonsCreator {
-        +insert_value(value: str)
-        +insert_operator(operator: str)
-        +calculate_result(value: str)
-        +clear_screen(value: str)
-        +delete_last_char(value: str)
-    }
-
-    TestButtonsCreator ..> ButtonsCreator : tests
-```
+<p align="center">
+    <img src="../tests_uml/uml_tests_ButtonsCreator.svg" alt="Diagrama UML
+        TestButtonsCreator" width="400"/>
+</p>

@@ -56,6 +56,7 @@ nav:
     - TestCalculator: tests/test_Calculator_doc.md
     - MockDisplay: tests/test_ButtonsCreator_doc.md
     - TestHistoryManager: tests/test_HistoryManager_doc.md
+  - Info: license.md
 
 plugins:
   - search

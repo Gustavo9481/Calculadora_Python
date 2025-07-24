@@ -38,25 +38,10 @@ Este método es el punto de entrada que inicia la ejecución de la aplicación.
 
 ## Diagrama UML
 
-```mermaid
-classDiagram
-    class AppCalculator {
-        +interface: InterfaceCreator
-        +history_db: HistoryManager
-        +main(): None
-    }
-
-    class InterfaceCreator {
-        +run(): None
-    }
-
-    class HistoryManager {
-        +create_table(): None
-    }
-
-    AppCalculator --> InterfaceCreator : uses
-    AppCalculator --> HistoryManager : uses
-```
+<p align="center">
+    <img src="../clases_uml/uml_app_calculator.svg" alt="Diagrama UML
+        AppCalculator" width="300"/>
+</p>
 
 ---
 

@@ -49,10 +49,10 @@ class HistoryTableDB(BaseModel):
 ---
 ### Diagrama UML
 
-<figure markdown="span">
-  ![HistoryTableDB - UML](./clases_uml/uml_history_db.svg){ width="400" }
-  <figcaption>Clase HistoryTableDB</figcaption>
-</figure>
+<p align="center">
+    <img src="../clases_uml/uml_history_db.svg" alt="Diagrama UML
+        HistoryTableDB" width="400"/>
+</p>
 
 
 ---

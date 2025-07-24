@@ -38,27 +38,7 @@ Este método público inicia la aplicación. Muestra la ventana principal y comi
 
 ## Diagrama UML
 
-```mermaid
-classDiagram
-    class InterfaceCreator {
-        +app: QApplication
-        +main_window: QMainWindow
-        +display_value_1: QLabel
-        +display_value_2: QLabel
-        +display_operator: QLabel
-        +display_result: QLabel
-        - _setup_window()
-        + run()
-    }
-
-    class ScreensCreator {
-        +create_screens(): tuple
-    }
-
-    class ButtonsCreator {
-        +create_buttons(): QGridLayout
-    }
-
-    InterfaceCreator o-- ScreensCreator : uses
-    InterfaceCreator o-- ButtonsCreator : uses
-```
+<p align="center">
+    <img src="../clases_uml/uml_interface_creator.svg" alt="Diagrama UML
+        InterfaceCreator" width="300"/>
+</p>

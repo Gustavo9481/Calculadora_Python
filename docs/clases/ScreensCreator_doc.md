@@ -47,35 +47,7 @@ Este es el método principal de la clase. Crea las cuatro pantallas de la calcul
 
 ## Diagrama UML
 
-```mermaid
-classDiagram
-    class ScreensCreator {
-        +main_window: QMainWindow
-        +display_value_1: QLabel
-        +display_operator: QLabel
-        +display_value_2: QLabel
-        +display_result: QLabel
-        +state: ScreenState
-        +create_screens(): tuple
-    }
-
-    class ScreenFactory {
-        - config: ScreenConfig
-        +create_screen(): QLabel
-    }
-
-    class ScreenConfig {
-        +style: str
-        +alignment: int
-    }
-
-    class ScreenState {
-        +display_value_1: str
-        +display_operator: str
-        +display_value_2: str
-        +display_result: str
-    }
-
-    ScreensCreator *-- ScreenState : manages
-    ScreensCreator o-- ScreenFactory : uses
-```
+<p align="center">
+    <img src="../clases_uml/uml_screen_creator.svg" alt="Diagrama UML
+        ScreensCreator" width="450"/>
+</p>

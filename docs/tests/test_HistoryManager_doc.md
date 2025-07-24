@@ -33,24 +33,7 @@ Verifica que se puedan obtener los últimos registros del historial y que los da
 
 ## Diagrama UML de Pruebas
 
-```mermaid
-classDiagram
-    class TestHistoryManager {
-        +setup_method()
-        +teardown_method()
-        +test_singleton_instance()
-        +test_create_table()
-        +test_new_history()
-        +test_delete_history()
-        +test_get_last_records()
-    }
-
-    class HistoryManager {
-        +create_table()
-        +new_history(history_equation: str, history_result: Decimal)
-        +delete_history()
-        +get_last_records(limit: int): list
-    }
-
-    TestHistoryManager ..> HistoryManager : tests
-```
+<p align="center">
+    <img src="../tests_uml/uml_tests_HistoryManager.svg" alt="Diagrama
+        UML TestHistoryManager" width="400"/>
+</p>
